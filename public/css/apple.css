@@ -1,0 +1,74 @@
+:root {
+  --apple-bg: #f5f5f7;
+  --apple-text: #1d1d1f;
+  --bprv-blue: #003b71; 
+  --bprv-olive: #4b5320; 
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+  color: var(--apple-text);
+  background-color: var(--apple-bg);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Header transition */
+.navbar-apple {
+  transition: background-color 0.4s ease, backdrop-filter 0.4s ease;
+  backdrop-filter: blur(0px);
+}
+.navbar-apple.solid {
+  background-color: rgba(255, 255, 255, 0.85) !important;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.navbar-apple.solid .nav-link, .navbar-apple.solid .navbar-brand {
+    color: var(--apple-text) !important;
+}
+
+/* Menu Toggle Icon Fix for Light mode */
+.navbar-apple.solid .navbar-toggler-icon {
+    filter: invert(1);
+}
+
+/* Bento Grid */
+.bento-card {
+  background-color: #ffffff;
+  border-radius: 24px;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+  border: none;
+}
+.bento-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 16px 32px rgba(0,0,0,0.08) !important;
+}
+
+.bento-img-container {
+    overflow: hidden;
+    border-radius: 24px 24px 0 0;
+}
+.bento-card img {
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.bento-card:hover img {
+  transform: scale(1.06);
+}
+
+/* Reveal Effect */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: all 0.9s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Hero Overlay */
+.hero-overlay {
+    background-color: rgba(0, 0, 0, 0.35);
+}

@@ -1,0 +1,27 @@
+# Orientações de Arquitetura - Portal 5º BPRv
+
+## 🚀 Roteamento Especial (Ambiente Segregado)
+
+Como o servidor de produção (Nginx) da Intranet não possui regras de reescrita (Rewrite Rules) ativas, utilizamos a técnica de **Shims Físicos** para garantir que as rotas do Laravel funcionem.
+
+### ⚠️ Regras de Ouro:
+1. **NÃO APAGUE** os arquivos `.php` na raiz (ex: `historico.php`, `redes-sociais.php`). Eles são os pontos de entrada que enganam o servidor para carregar o Laravel.
+2. **Novas Páginas Estáticas:** Para criar uma nova página, você precisará de 3 passos:
+   - Criar a View em `resources/views/public/`.
+   - Criar o arquivo físico na raiz (copie o de `historico.php` e mude a constante).
+   - Registrar a interceptação no topo do arquivo `routes/web.php`.
+
+## 🎨 Design System (Modern Authority)
+O portal utiliza uma estética inspirada no Apple Newsroom adaptada para a identidade da PMESP.
+- **Cores:** Dourado PMESP (#d5aa32), Cinza Asfalto (#383838) e Branco Puro (#ffffff).
+- **Tipografia:** Barlow Condensed (Títulos) e Source Sans 3 (Corpo).
+
+## 🛠️ Manutenção da Rodovia Animada
+O código da animação está no final da `home.blade.php`. 
+- Se precisar mudar a altura da via, altere tanto o CSS (`#rodoviaCanvas`) quanto o JavaScript (`initCanvas`).
+
+## 🖼️ Gestão de Mídia e Arquivos Estáticos (Restrições Intranet)
+Para que imagens e arquivos carreguem corretamente no ambiente de produção da PMESP, siga estas duas regras críticas:
+1. **Pasta Dupla:** Devido ao mapeamento do Apache (que olha para a raiz `V:\` e não para `V:\public\`), as imagens referenciadas por `asset()` devem existir fisicamente na raiz em `V:\imagens\`. Ao adicionar novas imagens durante o desenvolvimento, sempre certifique-se de copiá-las tanto para `V:\public\imagens\` (para rodar localmente com `artisan serve`) quanto para `V:\imagens\` (para funcionar na Intranet).
+2. **Nomenclatura Anti-bloqueio:** O firewall e os filtros de segurança da rede PMESP bloqueiam requisições de arquivos cujos nomes sugiram ferramentas externas suspeitas. **Nunca utilize** a palavra `qrcode` ou `qr_code` no nome dos arquivos (ex: evite `qrcode_falecmt.jpg`, use `comandante.jpg` ou `contato_cmt.jpg`).
+
