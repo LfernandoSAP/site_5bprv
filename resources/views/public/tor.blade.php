@@ -14,62 +14,68 @@
     }
 
     html body {
-        background-color: var(--tor-black) !important;
-        background: var(--tor-black) !important;
+        background-color: #050505 !important;
+        background: #050505 !important;
         color: #ffffff;
     }
 
     /* ── Hero TOR ── */
     .tor-hero {
-        height: 75vh;
+        height: 85vh;
         position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
         overflow: hidden;
-        background: radial-gradient(circle at center, rgba(213, 170, 50, 0.1), transparent 70%);
+        background: #050505; /* Fundo sólido para garantir o tom escuro */
+        background-image: 
+            radial-gradient(circle at 50% 50%, rgba(213, 170, 50, 0.15) 0%, transparent 60%),
+            linear-gradient(to bottom, transparent 80%, #050505 100%);
     }
 
     .tor-hero-content {
         text-align: center;
         z-index: 10;
-        max-width: 900px;
+        max-width: 1000px;
         padding: 0 20px;
     }
 
     .tor-logo-big {
-        width: 140px;
+        width: 160px;
         height: auto;
-        margin-bottom: 2rem;
-        filter: drop-shadow(0 0 20px rgba(213, 170, 50, 0.4));
+        margin-bottom: 2.5rem;
+        filter: drop-shadow(0 0 30px rgba(213, 170, 50, 0.5));
         animation: logoPulse 4s ease-in-out infinite;
     }
 
     @keyframes logoPulse {
-        0%, 100% { transform: scale(1); filter: drop-shadow(0 0 20px rgba(213, 170, 50, 0.4)); }
-        50% { transform: scale(1.05); filter: drop-shadow(0 0 35px rgba(213, 170, 50, 0.6)); }
+        0%, 100% { transform: scale(1); filter: drop-shadow(0 0 30px rgba(213, 170, 50, 0.3)); }
+        50% { transform: scale(1.05); filter: drop-shadow(0 0 50px rgba(213, 170, 50, 0.6)); }
     }
 
     .tor-title {
         font-family: 'Barlow Condensed', sans-serif;
-        font-size: clamp(3.5rem, 8vw, 6.5rem);
+        font-size: clamp(4rem, 10vw, 8rem);
         font-weight: 900;
-        letter-spacing: -3px;
-        line-height: 0.95;
-        margin-bottom: 1.5rem;
+        letter-spacing: -4px;
+        line-height: 0.85;
+        margin-bottom: 2rem;
         text-transform: uppercase;
-        background: linear-gradient(to bottom, #ffffff 50%, #666666);
+        background: linear-gradient(180deg, #ffffff 30%, #a1a1a6 70%, #d5aa32 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
+        filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
     }
 
     .tor-subtitle {
-        font-size: 1.25rem;
+        font-size: 1.4rem;
         color: var(--tor-gold);
-        letter-spacing: 6px;
+        letter-spacing: 12px;
         text-transform: uppercase;
-        font-weight: 800;
-        margin-bottom: 3rem;
+        font-weight: 900;
+        margin-bottom: 3.5rem;
+        opacity: 0.9;
+        text-shadow: 0 0 10px rgba(213, 170, 50, 0.4);
     }
 
     /* ── Grid de Missões ── */

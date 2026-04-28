@@ -3,6 +3,7 @@
 @section('title', 'Galeria e Memória | 5º BPRv')
 
 @section('styles')
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
     /* ── Variáveis de Identidade ── */
     :root {
@@ -10,7 +11,14 @@
         --galeria-black: #111111;
         --galeria-dark: #1a1a1a;
         --galeria-text: #ffffff;
+        --font-serif: 'Playfair Display', serif;
+        --font-charming: 'Great Vibes', cursive;
+        --font-elegant: 'Cormorant Garamond', serif;
     }
+
+    .font-serif-playfair { font-family: var(--font-serif) !important; }
+    .font-charming { font-family: var(--font-charming) !important; }
+    .font-elegant { font-family: var(--font-elegant) !important; }
 
     html body {
         background-color: var(--galeria-black) !important;
@@ -131,7 +139,128 @@
         filter: blur(60px);
     }
 
-    /* ── Seção Challenge Coin ── */
+    /* ── Mural de Heróis ── */
+    .hero-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(213, 170, 50, 0.1);
+        border-radius: 20px;
+        padding: 2.5rem;
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero-card:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: var(--galeria-gold);
+        transform: translateY(-5px);
+    }
+
+    .hero-card::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 4px;
+        background: linear-gradient(90deg, transparent, var(--galeria-gold), transparent);
+        opacity: 0;
+        transition: opacity 0.4s;
+    }
+
+    .hero-card:hover::before {
+        opacity: 1;
+    }
+
+    .historical-badge {
+        display: inline-block;
+        padding: 4px 12px;
+        background: rgba(213, 170, 50, 0.1);
+        color: var(--galeria-gold);
+        border-radius: 100px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 1.5rem;
+    }
+
+    /* ── Estética Retro Pioneiros ── */
+    .retro-paper {
+        background: #1a1a1a;
+        border: 1px solid rgba(213, 170, 50, 0.2);
+        padding: 3rem;
+        border-radius: 4px;
+        position: relative;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .retro-paper::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: url('https://www.transparenttextures.com/patterns/pinstriped-suit.png'); /* Subtle grain */
+        opacity: 0.05;
+        pointer-events: none;
+    }
+
+    .retro-title {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-weight: 900;
+        font-size: 3.5rem;
+        color: var(--galeria-gold);
+        text-transform: uppercase;
+        margin-bottom: 1.5rem;
+        border-bottom: 2px solid var(--galeria-gold);
+        display: inline-block;
+    }
+
+    .retro-photo-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .retro-photo-item {
+        background: #fff;
+        padding: 8px 8px 30px 8px;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        transform: rotate(var(--rotation, 0deg));
+        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .retro-photo-item:hover {
+        transform: rotate(0deg) scale(1.1);
+        z-index: 10;
+        box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+
+    .retro-photo-item img {
+        width: 100%;
+        aspect-ratio: 4/3;
+        object-fit: cover;
+        filter: sepia(0.4) contrast(1.1) brightness(0.9);
+    }
+
+    .retro-list {
+        list-style: none;
+        padding-left: 0;
+    }
+
+    .retro-list li {
+        position: relative;
+        padding-left: 1.5rem;
+        margin-bottom: 0.75rem;
+        color: #d1d1d1;
+    }
+
+    .retro-list li::before {
+        content: "•";
+        position: absolute;
+        left: 0;
+        color: var(--galeria-gold);
+        font-weight: bold;
+    }
+
     .coin-ring {
         width: 180px;
         height: 180px;
@@ -142,6 +271,12 @@
         justify-content: center;
         padding: 10px;
         margin: 0 auto 2rem;
+        animation: rotate-slow 20s linear infinite;
+    }
+
+    @keyframes rotate-slow {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
     }
 
     .coin-inner {
@@ -153,6 +288,55 @@
         align-items: center;
         justify-content: center;
         box-shadow: inset 0 0 20px rgba(0,0,0,0.2), 0 10px 30px rgba(213, 170, 50, 0.3);
+    }
+
+    /* ── Efeitos Challenge Coin ── */
+    .coin-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 2.5rem;
+        margin-bottom: 1.5rem;
+        perspective: 1000px;
+    }
+
+    .coin-img {
+        width: 160px;
+        height: auto;
+        filter: drop-shadow(0 15px 30px rgba(0,0,0,0.6));
+        animation: coinFloat 4s ease-in-out infinite;
+    }
+
+    .coin-img:nth-child(2) { animation-delay: -2s; }
+
+    @keyframes coinFloat {
+        0%, 100% { transform: translateY(0) rotate(0deg); }
+        50% { transform: translateY(-15px) rotate(3deg); }
+    }
+
+    .shimmer-gold {
+        background: linear-gradient(to right, #d5aa32 20%, #fff7d1 40%, #d5aa32 60%, #fff7d1 80%, #d5aa32 100%);
+        background-size: 200% auto;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: shine 4s linear infinite;
+    }
+
+    @keyframes shine {
+        to { background-position: 200% center; }
+    }
+
+    /* ── Dark Footer Override ── */
+    footer {
+        background-color: #080808 !important;
+        background: #080808 !important;
+        border-top: 1px solid rgba(255,255,255,0.05) !important;
+        color: rgba(255,255,255,0.3) !important;
+        margin-top: 0 !important;
+    }
+
+    footer p, footer small {
+        color: rgba(255,255,255,0.3) !important;
     }
 </style>
 @endsection
@@ -170,72 +354,191 @@
         </div>
     </section>
 
-    {{-- ── Galeria de Eternos Comandantes ── --}}
+    {{-- ── Seção Os Pioneiros de 1948 ── --}}
     <section class="py-24">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-heading font-bold text-white mb-4">Eternos Comandantes</h2>
-                <div class="w-20 h-1 bg-[#d5aa32] mx-auto mb-6"></div>
-                <p class="text-gray-500 max-w-2xl mx-auto font-serif italic text-lg">
-                    "Lideranças que moldaram a história do 5º BPRv com honra, disciplina e dedicação ao policiamento rodoviário."
-                </p>
-            </div>
-
-            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-                @php
-                    $comandantes = [
-                        'Ten Cel PM Quarterone', 'Ten Cel PM Ramiro', 'Ten Cel PM Cação', 
-                        'Ten Cel PM Marcondes', 'Ten Cel PM Frank', 'Ten Cel PM Michelazzo',
-                        'Ten Cel PM Julião', 'Ten Cel PM Carvalho', 'Ten Cel PM Infanti',
-                        'Ten Cel PM Menemilton', 'Ten Cel PM Hugo', 'Ten Cel PM Marcel'
-                    ];
-                @endphp
-
-                @foreach($comandantes as $nome)
-                <div class="portrait-frame">
-                    <div class="portrait-placeholder">
-                        <svg viewBox="0 0 448 512">
-                            <path d="M224 256c70.7 0 128-57.3 128-128S294.7 0 224 0 96 57.3 96 128s57.3 128 128 128zm89.6 32h-16.7c-22.2 10.2-46.9 16-72.9 16s-50.6-5.8-72.9-16h-16.7C60.2 288 0 348.2 0 422.4V464c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48v-41.6c0-74.2-60.2-134.4-134.4-134.4z"/>
-                        </svg>
-                    </div>
-                    <p class="commander-rank">Eterno Comandante</p>
-                    <h4 class="commander-name">{{ str_replace('Ten Cel PM ', '', $nome) }}</h4>
-                </div>
-                @endforeach
-            </div>
-        </div>
-    </section>
-
-    {{-- ── Memorial O Vigilante Rodoviário ── --}}
-    <section class="py-12">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="memorial-banner">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                    <div class="text-center lg:text-left">
-                        <span class="text-gold font-bold uppercase tracking-widest text-sm">Memorial de Identidade</span>
-                        <h2 class="text-5xl font-heading font-bold mt-4 mb-6">O Vigilante Rodoviário</h2>
-                        <p class="text-xl opacity-80 leading-relaxed mb-8 font-serif">
-                            Carlos Miranda, o eterno <strong>Ten Cel PM Carlos Miranda</strong>, imortalizou o policiamento nas estradas 
-                            como o primeiro herói da TV brasileira, tornando-se oficial da vida real neste Batalhão.
-                        </p>
-                        <ul class="space-y-4 text-gray-400">
-                            <li class="flex items-center gap-3">
-                                <span class="text-gold">✓</span> Mais que um personagem, um símbolo de civismo.
-                            </li>
-                            <li class="flex items-center gap-3">
-                                <span class="text-gold">✓</span> Acervo histórico preservado no Comando de Policiamento.
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="relative">
-                        <div class="bg-gray-800 aspect-video rounded-2xl overflow-hidden shadow-2xl flex items-center justify-center border-4 border-gray-700">
-                             <p class="text-gray-500 font-bold italic">Acervo Carlos Miranda</p>
+            <div class="retro-paper">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    
+                    {{-- Texto Histórico --}}
+                    <div>
+                        <span class="text-gold font-bold uppercase tracking-widest text-xs mb-2 block">Legado e Tradição</span>
+                        <h2 class="retro-title">Os Pioneiros de 1948</h2>
+                        
+                        <div class="space-y-6 text-gray-300 font-serif text-lg leading-relaxed">
+                            <p>
+                                📜 <strong>Fundação e Contexto Histórico</strong>
+                            </p>
+                            <p>
+                                Em 10 de janeiro de 1948, nascia oficialmente o policiamento rodoviário no Estado de São Paulo, vinculado à então Força Pública do Estado de São Paulo, instituição que posteriormente daria origem à atual Polícia Militar.
+                            </p>
+                            <p>
+                                O Brasil vivia um período de expansão da infraestrutura rodoviária, impulsionado pelo crescimento industrial e urbano do pós-guerra. A inauguração da <strong>Rodovia Anchieta (SP-150)</strong> representava um marco logístico e econômico, conectando o planalto ao porto de Santos — eixo vital para o desenvolvimento paulista.
+                            </p>
+                            <p>
+                                Nesse cenário, surgia a necessidade de uma força especializada para:
+                            </p>
+                            <ul class="retro-list">
+                                <li>Garantir a segurança dos usuários</li>
+                                <li>Fiscalizar o tráfego ainda incipiente</li>
+                                <li>Atuar em ocorrências e emergências rodoviárias</li>
+                                <li>Preservar a ordem pública nas novas rodovias</li>
+                            </ul>
                         </div>
                     </div>
+
+                    {{-- Galeria Retro Mosaic --}}
+                    <div class="retro-photo-grid">
+                        <div class="retro-photo-item" style="--rotation: -3deg">
+                            <img src="{{ asset('imagens/historico/pioneiros1.jpg') }}" alt="Pioneiros 1948">
+                        </div>
+                        <div class="retro-photo-item" style="--rotation: 2deg">
+                            <img src="{{ asset('imagens/historico/pioneiros2.jpg') }}" alt="Equipamento de Época">
+                        </div>
+                        <div class="retro-photo-item" style="--rotation: -1deg">
+                            <img src="{{ asset('imagens/historico/pioneiros3.jpg') }}" alt="Patrulhamento Histórico">
+                        </div>
+                        <div class="retro-photo-item" style="--rotation: 3deg">
+                            <img src="{{ asset('imagens/historico/pioneiros4.jpg') }}" alt="Inauguração Anchieta">
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
     </section>
+    {{-- ── Seção Legado de Guerra - FEB ── --}}
+    <section class="py-24" style="padding-top: 0;">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="retro-paper">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    
+                    {{-- Texto Histórico --}}
+                    <div>
+                        <span class="text-gold font-bold uppercase tracking-widest text-xs mb-2 block">Honra e Bravura</span>
+                        <h2 class="retro-title">Legado de Guerra — A FEB</h2>
+                        
+                        <div class="space-y-6 text-gray-300 font-serif text-lg leading-relaxed">
+                            <p>
+                                🎖️ <strong>Veteranos da Itália</strong>
+                            </p>
+                            <p>
+                                Grande parte dos primeiros patrulheiros rodoviários era formada por ex-combatentes da:
+                            </p>
+                            <p class="text-gold font-bold text-2xl font-heading uppercase tracking-wider">
+                                👉 Força Expedicionária Brasileira (FEB)
+                            </p>
+                            <p>
+                                A FEB participou da Segunda Guerra Mundial, combatendo na Itália entre 1944 e 1945 ao lado dos Aliados.
+                            </p>
+                            
+                            <p>
+                                🧠 <strong>Influência Militar na Polícia Rodoviária</strong>
+                            </p>
+                            <p>
+                                Esses veteranos trouxeram valores fundamentais que foram decisivos para moldar a identidade da corporação:
+                            </p>
+                            <ul class="retro-list">
+                                <li>Disciplina militar rígida</li>
+                                <li>Espírito de corpo (camaradagem)</li>
+                                <li>Resiliência em situações adversas</li>
+                                <li>Tomada de decisão sob pressão</li>
+                                <li>Organização tática</li>
+                            </ul>
+
+                            <p>
+                                🪖 <strong>Impacto direto na doutrina</strong>
+                            </p>
+                            <p>
+                                A atuação desses ex-combatentes contribuiu diretamente para a estruturação inicial do patrulhamento, a padronização de condutas operacionais e a formação de uma tropa altamente confiável, focada em missão e honra.
+                            </p>
+                        </div>
+                    </div>
+
+                    {{-- Galeria Retro Mosaic --}}
+                    <div class="retro-photo-grid">
+                        <div class="retro-photo-item" style="--rotation: -2deg">
+                            <img src="{{ asset('imagens/historico/veteranos_italia4.jpg') }}" alt="FEB Veteranos">
+                        </div>
+                        <div class="retro-photo-item" style="--rotation: 3deg">
+                            <img src="{{ asset('imagens/historico/veteranos_italia.jpg') }}" alt="Marcha da FEB">
+                        </div>
+                        <div class="retro-photo-item" style="--rotation: -1deg">
+                            <img src="{{ asset('imagens/historico/veteranos_italia3.jpg') }}" alt="Acampamento na Itália">
+                        </div>
+                        <div class="retro-photo-item" style="--rotation: 2deg">
+                            <img src="{{ asset('imagens/historico/veteranos_italia2.jpg') }}" alt="Símbolo da FEB">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+    {{-- ── Seção Liderança Fundadora ── --}}
+    <section class="py-24" style="padding-top: 0;">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="retro-paper">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                    
+                    {{-- Texto Histórico --}}
+                    <div>
+                        <span class="text-gold font-bold uppercase tracking-widest text-xs mb-2 block">Liderança e Evolução</span>
+                        <h2 class="retro-title">Liderança Fundadora</h2>
+                        
+                        <div class="space-y-6 text-gray-300 font-serif text-lg leading-relaxed">
+                            <p>
+                                🧭 <strong>O Primeiro Comando</strong>
+                            </p>
+                            <p>
+                                O primeiro comando da tropa rodoviária ficou sob responsabilidade do:
+                            </p>
+                            <p class="text-gold font-bold text-2xl font-heading uppercase tracking-wider">
+                                👉 Tenente Pina
+                            </p>
+                            <p>
+                                Oficial da Força Pública, ele foi responsável por organizar o efetivo inicial, definir as primeiras estratégias operacionais e estabelecer a disciplina da nova unidade.
+                            </p>
+                            
+                            <p>
+                                🏗️ <strong>Construção das Bases Operacionais</strong>
+                            </p>
+                            <p>
+                                Sob sua liderança, foram estabelecidos pontos estratégicos de patrulhamento, rotinas de fiscalização e procedimentos de abordagem que transformaram um grupo inicial em uma estrutura permanente de segurança viária.
+                            </p>
+
+                            <h3 class="text-2xl font-heading font-bold text-white mt-8 mb-4">🧱 EVOLUÇÃO HISTÓRICA</h3>
+                            <p class="text-gold font-bold">📈 Da Patrulha à Polícia Especializada</p>
+                            <ul class="retro-list">
+                                <li><strong>Décadas de 1950–1970:</strong> Expansão da malha rodoviária, aumento do efetivo e consolidação institucional.</li>
+                                <li><strong>Décadas de 1980–2000:</strong> Modernização de viaturas, introdução de rádios e sistemas de comunicação e especialização em acidentes.</li>
+                                <li><strong>Século XXI:</strong> Uso de tecnologia de ponta (radares, sistemas integrados), inteligência policial e operações de grande escala.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    {{-- Galeria Retro Mosaic --}}
+                    <div class="retro-photo-grid">
+                        <div class="retro-photo-item" style="--rotation: 3deg">
+                            <img src="{{ asset('imagens/historico/pina.jpg') }}" alt="Tenente Pina em Operação">
+                        </div>
+                        <div class="retro-photo-item" style="--rotation: -2deg">
+                            <img src="{{ asset('imagens/historico/pina2.jpg') }}" alt="Formação Inicial">
+                        </div>
+                        <div class="retro-photo-item" style="--rotation: 1deg">
+                            <img src="{{ asset('imagens/historico/pina3.jpg') }}" alt="Viatura de Época">
+                        </div>
+                        <div class="retro-photo-item" style="--rotation: -3deg">
+                            <img src="{{ asset('imagens/historico/pina4.jpg') }}" alt="Legado Institucional">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
 
     {{-- ── Seção Challenge Coin e Brasoes ── --}}
     <section class="py-24" style="background-color: #0d0d0d;">
@@ -244,32 +547,31 @@
                 
                 {{-- Coin --}}
                 <div class="lg:col-span-1">
-                    <div class="coin-ring">
-                        <div class="coin-inner">
-                            <span class="text-white text-5xl font-bold">5º</span>
-                        </div>
+                    <div class="coin-container">
+                        <img src="{{ asset('imagens/logos/logo_cois1.png') }}" alt="Coin Frente" class="coin-img">
+                        <img src="{{ asset('imagens/logos/logo_coin2.png') }}" alt="Coin Verso" class="coin-img">
                     </div>
-                    <h3 class="text-2xl font-heading font-bold mb-4 text-white">Challenge Coin</h3>
-                    <p class="text-gray-400 font-body">
+                    <h3 class="text-4xl font-charming shimmer-gold mb-4">Challenge Coin</h3>
+                    <p class="text-xl font-elegant italic tracking-wide text-gray-300 leading-relaxed">
                         A moeda da irmandade e tradição, entregue apenas àqueles que demonstraram bravura e lealdade ao Batalhão.
                     </p>
                 </div>
 
                 {{-- Brasao --}}
                 <div class="lg:col-span-2 text-left bg-gray-900/50 p-12 rounded-[40px] border border-white/5">
-                    <h3 class="text-3xl font-heading font-bold mb-6 text-white">Heráldica & Brasoes</h3>
-                    <p class="text-lg text-gray-400 mb-8 leading-relaxed">
+                    <h3 class="text-3xl font-serif-playfair font-bold mb-6 text-white">Heráldica & Brasões</h3>
+                    <p class="text-lg text-gray-400 mb-8 leading-relaxed font-serif-playfair">
                         Nossos símbolos representam a autoridade e a presença do Estado nas rodovias. A <strong>Asa Rodoviária</strong>, 
                         em conjunto com as cores de nossa bandeira, simboliza a rapidez e a firmeza no socorro e fiscalização.
                     </p>
                     <div class="grid grid-cols-2 gap-8">
                         <div>
-                            <h4 class="font-bold text-white border-l-4 border-gold pl-4 mb-2">Ano de Criação</h4>
-                            <p class="text-gray-500">10 de Janeiro de 1948</p>
+                            <h4 class="font-bold text-white border-l-4 border-gold pl-4 mb-2 font-serif-playfair" style="border-left-color: #d5aa32;">Ano de Criação</h4>
+                            <p class="text-gray-500 font-serif-playfair">2008</p>
                         </div>
                         <div>
-                            <h4 class="font-bold text-white border-l-4 border-gold pl-4 mb-2">Lema Oficial</h4>
-                            <p class="text-gray-500">Guardião do Sudoeste</p>
+                            <h4 class="font-bold text-white border-l-4 border-gold pl-4 mb-2 font-serif-playfair" style="border-left-color: #d5aa32;">Lema Oficial</h4>
+                            <p class="text-gray-500 font-serif-playfair">O GUARDIÃO DAS RODOVIAS DO SUDOESTE</p>
                         </div>
                     </div>
                 </div>

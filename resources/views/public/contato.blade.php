@@ -228,7 +228,7 @@
                     <div class="dark-card emergency-hero h-full flex flex-col justify-center">
                         <h3 class="text-2xl font-bold mb-2">CANAL DIRETO COM O COMANDANTE</h3>
                         <div class="emergency-number mb-2">
-                            <a href="https://qr.link/ngxqYo" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
+                            <a href="https://docs.google.com/forms/d/1LMqOUTbp9Stsbi_BRTZd5vjWaGa65mQtir8sqzxAZhc/viewform?edit_requested=true" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">
                                 FALE COM O COMANDANTE DO 5º BPRv
                             </a>
                         </div>
@@ -236,7 +236,7 @@
                             👆 Clique aqui ou escaneie com o seu celular o QrCode ao lado
                         </p>
                         <img
-                            src="{{ asset('imagens/comandante.jpg') }}"
+                            src="{{ asset('imagens/qrcode_fale_cmt.jpg') }}"
                             alt="Fale com o Comandante"
                             style="display: block; align-self: flex-start; width: 140px; height: auto; margin-left: 1cm; border-radius: 8px; border: 2px solid rgba(213,170,50,0.4);">
                     </div>
@@ -246,6 +246,14 @@
                 <div class="lg:col-span-12 mt-12">
                     <p class="info-label" style="text-align: center; margin: 2rem auto; font-size: 1rem; color: var(--contact-gold) !important;">Administração e Assuntos Específicos</p>
                     <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
+
+                        {{-- Telemática --}}
+                        <div class="dark-card sector-card">
+                            <p class="sector-name">Seção de Telemática</p>
+                            <h4 class="sector-title">Telemática</h4>
+                            <a href="tel:01533333149" class="sector-link">📞 (15) 3333-3177</a>
+                            <a href="mailto:5bprvp1@policiamilitar.sp.gov.br" class="sector-link text-xs mt-2">✉️ E-mail Telematica - 5bprvtelematica@policiamilitar.sp.gov.br</a>
+                        </div>
 
                         {{-- Pessoal --}}
                         <div class="dark-card sector-card">
@@ -280,9 +288,9 @@
                             <a href="mailto:5bprvp5@policiamilitar.sp.gov.br" class="sector-link text-xs mt-2">✉️ E-mail P5 - 5bprvp5@policiamilitar.sp.gov.br</a>
                         </div>
 
-                        {{-- Justiça --}}
+                        {{-- Justiça e Disciplina --}}
                         <div class="dark-card sector-card">
-                            <p class="sector-name">Justiça (SJD)</p>
+                            <p class="sector-name">Justiça e Disciplina (PJMD)</p>
                             <h4 class="sector-title">Protocolo Disciplinar</h4>
                             <a href="tel:01533333148" class="sector-link">📞 (15) 3333-3148</a>
                             <a href="mailto:5bprvp5@policiamilitar.sp.gov.br" class="sector-link text-xs mt-2">✉️ E-mail  - 5bprvprotocolo@policiamilitar.sp.gov.br</a>

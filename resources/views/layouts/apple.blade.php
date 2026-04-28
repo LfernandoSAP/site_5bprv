@@ -180,9 +180,9 @@
                 <li><a class="nav-link-apple {{ defined('MODO_HISTORICO') ? 'active' : '' }}" href="{{ env('APP_URL') }}/historico.php" style="font-size: 1.035rem; line-height: 35px;">Histórico</a></li>
                 <li><a class="nav-link-apple {{ defined('MODO_MEMORIAL') ? 'active' : '' }}" href="{{ env('APP_URL') }}/memorial.php" style="font-size: 1.035rem; line-height: 35px;">Memorial</a></li>
                 <li><a class="nav-link-apple {{ defined('MODO_TOR') ? 'active' : '' }}" href="{{ env('APP_URL') }}/tor.php" style="font-size: 1.035rem; line-height: 35px;">TOR</a></li>
-                <li><a class="nav-link-apple {{ defined('MODO_GALERIAS') ? 'active' : '' }}" href="{{ env('APP_URL') }}/galerias.php" style="font-size: 1.035rem; line-height: 35px;">Galerias</a></li>
+                <li><a class="nav-link-apple {{ defined('MODO_GALERIAS') ? 'active' : '' }}" href="{{ env('APP_URL') }}/galerias.php" style="font-size: 1.035rem; line-height: 35px;">Galeria</a></li>
                 <li><a class="nav-link-apple {{ defined('MODO_REDES') ? 'active' : '' }}" href="{{ env('APP_URL') }}/redes-sociais.php" style="font-size: 1.035rem; line-height: 35px;">Redes Sociais</a></li>
-                <li><a class="nav-link-apple {{ defined('MODO_NOTICIAS') || request()->is('publicacoes*') ? 'active' : '' }}" href="{{ url('/noticias.php') }}" style="font-size: 1.035rem; line-height: 35px;">Notícias</a></li>
+                <li><a class="nav-link-apple {{ defined('MODO_NOTICIAS') || request()->is('publicacoes*') ? 'active' : '' }}" href="{{ env('APP_URL') }}/noticias.php" style="font-size: 1.035rem; line-height: 35px;">Notícias</a></li>
                 <li><a class="nav-link-apple {{ defined('MODO_CONTATO') ? 'active' : '' }}" href="{{ env('APP_URL') }}/contato.php" style="font-size: 1.035rem; line-height: 35px;">Contato</a></li>
             </ul>
 
