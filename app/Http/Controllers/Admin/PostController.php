@@ -37,7 +37,7 @@ class PostController extends Controller
 
         Post::create($data);
 
-        return redirect()->route('admin.posts.index')->with('status', 'Notícia criada com sucesso.');
+        return admin_redirect('admin.posts.index', [], 'Notícia criada com sucesso.');
     }
 
     public function edit(Post $post): View
@@ -52,14 +52,14 @@ class PostController extends Controller
 
         $post->update($data);
 
-        return redirect()->route('admin.posts.index')->with('status', 'Notícia atualizada com sucesso.');
+        return admin_redirect('admin.posts.index', [], 'Notícia atualizada com sucesso.');
     }
 
     public function destroy(Post $post): RedirectResponse
     {
         $post->delete();
 
-        return redirect()->route('admin.posts.index')->with('status', 'Notícia removida com sucesso.');
+        return admin_redirect('admin.posts.index', [], 'Notícia removida com sucesso.');
     }
 
     private function validatedData(StorePostRequest|UpdatePostRequest $request, ?Post $post = null): array

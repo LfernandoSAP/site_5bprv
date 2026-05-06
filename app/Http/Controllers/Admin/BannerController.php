@@ -36,7 +36,7 @@ class BannerController extends Controller
 
         Banner::create($data);
 
-        return redirect()->route('admin.banners.index')->with('status', 'Banner criado com sucesso.');
+        return admin_redirect('admin.banners.index', [], 'Banner criado com sucesso.');
     }
 
     public function edit(Banner $banner): View
@@ -51,14 +51,14 @@ class BannerController extends Controller
 
         $banner->update($data);
 
-        return redirect()->route('admin.banners.index')->with('status', 'Banner atualizado com sucesso.');
+        return admin_redirect('admin.banners.index', [], 'Banner atualizado com sucesso.');
     }
 
     public function destroy(Banner $banner): RedirectResponse
     {
         $banner->delete();
 
-        return redirect()->route('admin.banners.index')->with('status', 'Banner removido com sucesso.');
+        return admin_redirect('admin.banners.index', [], 'Banner removido com sucesso.');
     }
 
     private function validatedData(StoreBannerRequest|UpdateBannerRequest $request, ?Banner $banner = null): array

@@ -33,7 +33,7 @@ class UserController extends Controller
     {
         User::create($this->validatedData($request->validated()));
 
-        return redirect()->route('admin.users.index')->with('status', 'Usuário criado com sucesso.');
+        return admin_redirect('admin.users.index', [], 'Usuário criado com sucesso.');
     }
 
     public function edit(User $user): View
@@ -52,7 +52,7 @@ class UserController extends Controller
 
         $user->update($data);
 
-        return redirect()->route('admin.users.index')->with('status', 'Usuário atualizado com sucesso.');
+        return admin_redirect('admin.users.index', [], 'Usuário atualizado com sucesso.');
     }
 
     public function destroy(User $user): RedirectResponse
@@ -61,7 +61,7 @@ class UserController extends Controller
 
         $user->delete();
 
-        return redirect()->route('admin.users.index')->with('status', 'Usuário removido com sucesso.');
+        return admin_redirect('admin.users.index', [], 'Usuário removido com sucesso.');
     }
 
     private function validatedData(array $validated, bool $requirePassword = true): array

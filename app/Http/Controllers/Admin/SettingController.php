@@ -38,7 +38,7 @@ class SettingController extends Controller
             );
         }
 
-        return redirect()->route('admin.settings.edit')->with('status', 'Configurações atualizadas com sucesso.');
+        return admin_redirect('admin.settings.edit', [], 'Configurações atualizadas com sucesso.');
     }
 
     private function labels(): array

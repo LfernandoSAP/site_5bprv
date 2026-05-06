@@ -40,7 +40,7 @@ class GalleryController extends Controller
         $gallery = Gallery::create($data);
         $this->storePhotos($request, $gallery);
 
-        return redirect()->route('admin.galleries.edit', $gallery)->with('status', 'Galeria criada com sucesso.');
+        return admin_redirect('admin.galleries.edit', $gallery, 'Galeria criada com sucesso.');
     }
 
     public function edit(Gallery $gallery): View
@@ -58,14 +58,14 @@ class GalleryController extends Controller
         $gallery->update($data);
         $this->storePhotos($request, $gallery);
 
-        return redirect()->route('admin.galleries.edit', $gallery)->with('status', 'Galeria atualizada com sucesso.');
+        return admin_redirect('admin.galleries.edit', $gallery, 'Galeria atualizada com sucesso.');
     }
 
     public function destroy(Gallery $gallery): RedirectResponse
     {
         $gallery->delete();
 
-        return redirect()->route('admin.galleries.index')->with('status', 'Galeria removida com sucesso.');
+        return admin_redirect('admin.galleries.index', [], 'Galeria removida com sucesso.');
     }
 
     public function destroyPhoto(Gallery $gallery, GalleryPhoto $photo): RedirectResponse
@@ -74,7 +74,7 @@ class GalleryController extends Controller
 
         $photo->delete();
 
-        return redirect()->route('admin.galleries.edit', $gallery)->with('status', 'Foto removida com sucesso.');
+        return admin_redirect('admin.galleries.edit', $gallery, 'Foto removida com sucesso.');
     }
 
     private function validatedData(StoreGalleryRequest|UpdateGalleryRequest $request, ?Gallery $gallery = null): array

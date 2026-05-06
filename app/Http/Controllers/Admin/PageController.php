@@ -37,7 +37,7 @@ class PageController extends Controller
 
         Page::create($data);
 
-        return redirect()->route('admin.pages.index')->with('status', 'Página criada com sucesso.');
+        return admin_redirect('admin.pages.index', [], 'Página criada com sucesso.');
     }
 
     public function edit(Page $page): View
@@ -52,14 +52,14 @@ class PageController extends Controller
 
         $page->update($data);
 
-        return redirect()->route('admin.pages.index')->with('status', 'Página atualizada com sucesso.');
+        return admin_redirect('admin.pages.index', [], 'Página atualizada com sucesso.');
     }
 
     public function destroy(Page $page): RedirectResponse
     {
         $page->delete();
 
-        return redirect()->route('admin.pages.index')->with('status', 'Página removida com sucesso.');
+        return admin_redirect('admin.pages.index', [], 'Página removida com sucesso.');
     }
 
     private function validatedData(StorePageRequest|UpdatePageRequest $request): array
