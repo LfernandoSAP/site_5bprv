@@ -20,6 +20,8 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->web(append: [
             SecurityHeaders::class,
         ]);
+
+        $middleware->redirectGuestsTo('/unidades/5bprv/login.php');
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

@@ -9,7 +9,7 @@
         <div class="alert alert-success rounded-4">{{ session('status') }}</div>
     @endif
 
-    <form method="POST" action="{{ route('login') }}">
+    <form method="POST" action="{{ url('login.php') }}">
         @csrf
 
         <div class="mb-3">
