@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\AppointmentController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
@@ -54,9 +53,6 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::resource('pages', AdminPageController::class)->except('show');
     Route::resource('galleries', AdminGalleryController::class)->except('show');
     Route::delete('galleries/{gallery}/photos/{photo}', [AdminGalleryController::class, 'destroyPhoto'])->name('galleries.photos.destroy');
-    Route::get('appointments', [AppointmentController::class, 'index'])->name('appointments.index');
-    Route::patch('appointments/{appointment}/status', [AppointmentController::class, 'updateStatus'])->name('appointments.update-status');
-    Route::delete('appointments/{appointment}', [AppointmentController::class, 'destroy'])->name('appointments.destroy');
 });
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {

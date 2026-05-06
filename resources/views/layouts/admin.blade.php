@@ -39,8 +39,7 @@
                     <a href="{{ ag('banners') }}" class="nav-link {{ request()->routeIs('admin.banners.*') ? 'active' : '' }}">Banners</a>
                     <a href="{{ ag('pages') }}" class="nav-link {{ request()->routeIs('admin.pages.*') ? 'active' : '' }}">Páginas institucionais</a>
                     <a href="{{ ag('galleries') }}" class="nav-link {{ request()->routeIs('admin.galleries.*') ? 'active' : '' }}">Galerias</a>
-                    <a href="{{ ag('appointments') }}" class="nav-link {{ request()->routeIs('admin.appointments.*') ? 'active' : '' }}">Agendamentos</a>
-                    @if (auth()->user()->isAdmin())
+@if (auth()->user()->isAdmin())
                         <a href="{{ ag('users') }}" class="nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">Usuários</a>
                         <a href="{{ ag('settings') }}" class="nav-link {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">Configurações</a>
                     @endif
