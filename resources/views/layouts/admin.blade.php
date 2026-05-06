@@ -33,11 +33,6 @@
                     <div class="font-heading fs-4 text-gold">Gestão do Portal</div>
                     <p class="mb-0 small text-white-50">Base preparada para conteúdo institucional, notícias, banners e galerias.</p>
                 </div>
-                @php
-                    function ag($path) {
-                        return url('admin-go.php') . '?path=' . urlencode('admin/' . ltrim($path, '/'));
-                    }
-                @endphp
                 <nav class="nav flex-column gap-2">
                     <a href="{{ url('admin.php') }}" class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">Dashboard</a>
                     <a href="{{ ag('posts') }}" class="nav-link {{ request()->routeIs('admin.posts.*') ? 'active' : '' }}">Notícias</a>
