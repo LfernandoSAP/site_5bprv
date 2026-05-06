@@ -9,7 +9,7 @@
         <p class="text-[#6e6e6e] mb-0">Atualize o conteúdo institucional selecionado.</p>
     </div>
 
-    <form method="POST" action="{{ ag('pages/' . $page->id) }}">
+    <form method="POST" action="{{ ag('pages/' . $page->slug) }}">
         @csrf
         @method('PUT')
         @include('admin.pages._form')

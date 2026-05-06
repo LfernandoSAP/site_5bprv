@@ -16,7 +16,6 @@
 
     <form method="POST" action="{{ ag('settings') }}">
         @csrf
-        @method('PUT')
 
         <div class="grid grid-cols-1 xl:grid-cols-3 gap-4">
             <div class="xl:col-span-2">

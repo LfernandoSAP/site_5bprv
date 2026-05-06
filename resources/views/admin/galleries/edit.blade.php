@@ -11,7 +11,7 @@
         <p class="text-[#6e6e6e] mb-0">Atualize informações, capa e fotos da galeria selecionada.</p>
     </div>
 
-    <form method="POST" action="{{ ag('galleries/' . $gallery->id) }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ ag('galleries/' . $gallery->slug) }}" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         @include('admin.galleries._form')

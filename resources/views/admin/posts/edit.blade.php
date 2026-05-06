@@ -9,7 +9,7 @@
         <p class="text-[#6e6e6e] mb-0">Atualize os dados da publicação.</p>
     </div>
 
-    <form method="POST" action="{{ ag('posts/' . $post->id) }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ ag('posts/' . $post->slug) }}" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         @include('admin.posts._form')

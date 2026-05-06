@@ -63,7 +63,7 @@
                             <div class="font-semibold">{{ $photo->title ?: 'Sem título' }}</div>
                             <div class="text-sm text-[#6e6e6e] mb-2">{{ $photo->caption ?: 'Sem legenda' }}</div>
                             <div class="text-sm text-[#6e6e6e] mb-3"><code class="text-xs bg-gray-100 px-1 py-0.5 rounded">{{ $photo->file_path }}</code></div>
-                            <form method="POST" action="{{ ag('galleries/' . $gallery->id . '/photos/' . $photo->id) }}" onsubmit="return confirm('Deseja remover esta foto?');">
+                            <form method="POST" action="{{ ag('galleries/' . $gallery->slug . '/photos/' . $photo->id) }}" onsubmit="return confirm('Deseja remover esta foto?');">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="px-3 py-1.5 text-sm border border-red-300 text-red-600 rounded-full hover:bg-red-600 hover:text-white hover:border-red-600 transition">Excluir foto</button>

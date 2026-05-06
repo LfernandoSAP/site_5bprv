@@ -61,7 +61,7 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {
     Route::get('settings', [SettingController::class, 'edit'])->name('settings.edit');
-    Route::put('settings', [SettingController::class, 'update'])->name('settings.update');
+    Route::match(['PUT', 'POST'], 'settings', [SettingController::class, 'update'])->name('settings.update');
     Route::resource('users', UserController::class)->except('show');
 });
 
