@@ -33,16 +33,21 @@
                     <div class="font-heading fs-4 text-gold">Gestão do Portal</div>
                     <p class="mb-0 small text-white-50">Base preparada para conteúdo institucional, notícias, banners e galerias.</p>
                 </div>
+                @php
+                    function ag($path) {
+                        return url('admin-go.php') . '?path=' . urlencode('admin/' . ltrim($path, '/'));
+                    }
+                @endphp
                 <nav class="nav flex-column gap-2">
-                    <a href="{{ route('admin.dashboard') }}" class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">Dashboard</a>
-                    <a href="{{ route('admin.posts.index') }}" class="nav-link {{ request()->routeIs('admin.posts.*') ? 'active' : '' }}">Notícias</a>
-                    <a href="{{ route('admin.banners.index') }}" class="nav-link {{ request()->routeIs('admin.banners.*') ? 'active' : '' }}">Banners</a>
-                    <a href="{{ route('admin.pages.index') }}" class="nav-link {{ request()->routeIs('admin.pages.*') ? 'active' : '' }}">Páginas institucionais</a>
-                    <a href="{{ route('admin.galleries.index') }}" class="nav-link {{ request()->routeIs('admin.galleries.*') ? 'active' : '' }}">Galerias</a>
-                    <a href="{{ route('admin.appointments.index') }}" class="nav-link {{ request()->routeIs('admin.appointments.*') ? 'active' : '' }}">Agendamentos</a>
+                    <a href="{{ url('admin.php') }}" class="nav-link {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">Dashboard</a>
+                    <a href="{{ ag('posts') }}" class="nav-link {{ request()->routeIs('admin.posts.*') ? 'active' : '' }}">Notícias</a>
+                    <a href="{{ ag('banners') }}" class="nav-link {{ request()->routeIs('admin.banners.*') ? 'active' : '' }}">Banners</a>
+                    <a href="{{ ag('pages') }}" class="nav-link {{ request()->routeIs('admin.pages.*') ? 'active' : '' }}">Páginas institucionais</a>
+                    <a href="{{ ag('galleries') }}" class="nav-link {{ request()->routeIs('admin.galleries.*') ? 'active' : '' }}">Galerias</a>
+                    <a href="{{ ag('appointments') }}" class="nav-link {{ request()->routeIs('admin.appointments.*') ? 'active' : '' }}">Agendamentos</a>
                     @if (auth()->user()->isAdmin())
-                        <a href="{{ route('admin.users.index') }}" class="nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">Usuários</a>
-                        <a href="{{ route('admin.settings.edit') }}" class="nav-link {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">Configurações</a>
+                        <a href="{{ ag('users') }}" class="nav-link {{ request()->routeIs('admin.users.*') ? 'active' : '' }}">Usuários</a>
+                        <a href="{{ ag('settings') }}" class="nav-link {{ request()->routeIs('admin.settings.*') ? 'active' : '' }}">Configurações</a>
                     @endif
                 </nav>
             </aside>
