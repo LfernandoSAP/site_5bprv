@@ -275,6 +275,100 @@
         </div>
     </div>
 
+    {{-- ── Últimas Notícias (dinâmico) ── --}}
+    @if(!empty($latestPosts))
+    <div class="mt-16">
+        <div class="flex items-center gap-4 mb-8">
+            <h2 class="font-heading text-2xl font-bold text-[#202020] whitespace-nowrap">ÚLTIMAS NOTÍCIAS</h2>
+            <div class="flex-grow" style="height:2px; background: linear-gradient(to right, #d5aa32, transparent);"></div>
+            <a href="{{ route('public.noticias') }}"
+               class="text-xs font-bold uppercase tracking-widest text-[#8a7a30] whitespace-nowrap hover:text-[#d5aa32] transition-colors">
+                Ver todas →
+            </a>
+        </div>
+        <div class="carousel-grid">
+            @foreach($latestPosts as $post)
+            <a href="{{ isset($post['slug']) && $post['slug'] ? route('public.posts.show', $post['slug']) : route('public.noticias') }}"
+               class="multi-item-card" style="text-decoration:none; color:inherit;">
+                @if(!empty($post['image_path']))
+                    <img src="{{ \Illuminate\Support\Facades\Storage::url($post['image_path']) }}"
+                         class="multi-item-img" alt="{{ $post['title'] }}">
+                @else
+                    <div class="multi-item-img" style="background: linear-gradient(135deg, #e8e4d4, #c8c2a8);
+                         display:flex; align-items:center; justify-content:center;">
+                        <img src="{{ asset('imagens/logos/logo_5rv.png') }}"
+                             style="height:48px; opacity:0.18;" alt="">
+                    </div>
+                @endif
+                <div class="multi-item-caption" style="flex-direction:column; align-items:flex-start; text-align:left; padding: 12px 16px !important;">
+                    @if(!empty($post['published_at']))
+                        <span style="font-size:0.68rem; color:#8a7a30; font-weight:700;
+                                     text-transform:uppercase; letter-spacing:1px; margin-bottom:4px;">
+                            {{ \Carbon\Carbon::parse($post['published_at'])->translatedFormat('d M Y') }}
+                        </span>
+                    @endif
+                    <h5 style="margin:0; font-size:0.9rem; font-weight:700; color:#222; line-height:1.3;">
+                        {{ $post['title'] }}
+                    </h5>
+                    @if(!empty($post['excerpt']))
+                        <p style="margin:4px 0 0; font-size:0.78rem; color:#666; line-height:1.4;">
+                            {{ \Illuminate\Support\Str::limit($post['excerpt'], 80) }}
+                        </p>
+                    @endif
+                </div>
+            </a>
+            @endforeach
+        </div>
+    </div>
+    @endif
+
+    {{-- ── Galerias em Destaque (dinâmico) ── --}}
+    @if(!empty($galleryHighlights))
+    <div class="mt-16">
+        <div class="flex items-center gap-4 mb-8">
+            <h2 class="font-heading text-2xl font-bold text-[#202020] whitespace-nowrap">GALERIAS</h2>
+            <div class="flex-grow" style="height:2px; background: linear-gradient(to right, #d5aa32, transparent);"></div>
+            <a href="{{ route('public.galleries.index') }}"
+               class="text-xs font-bold uppercase tracking-widest text-[#8a7a30] whitespace-nowrap hover:text-[#d5aa32] transition-colors">
+                Ver todas →
+            </a>
+        </div>
+        <div class="carousel-grid">
+            @foreach($galleryHighlights as $gallery)
+            <a href="{{ isset($gallery['slug']) && $gallery['slug'] ? route('public.galleries.show', $gallery['slug']) : route('public.galleries.index') }}"
+               class="multi-item-card" style="text-decoration:none; color:inherit;">
+                @if(!empty($gallery['cover_image_path']))
+                    <img src="{{ \Illuminate\Support\Facades\Storage::url($gallery['cover_image_path']) }}"
+                         class="multi-item-img" alt="{{ $gallery['title'] }}">
+                @else
+                    <div class="multi-item-img" style="background: linear-gradient(135deg, #e8e4d4, #c8c2a8);
+                         display:flex; align-items:center; justify-content:center;">
+                        <img src="{{ asset('imagens/logos/logo_5rv.png') }}"
+                             style="height:48px; opacity:0.18;" alt="">
+                    </div>
+                @endif
+                <div class="multi-item-caption" style="flex-direction:column; align-items:flex-start; text-align:left; padding: 12px 16px !important;">
+                    @if(!empty($gallery['photos_count']))
+                        <span style="font-size:0.68rem; color:#8a7a30; font-weight:700;
+                                     text-transform:uppercase; letter-spacing:1px; margin-bottom:4px;">
+                            {{ $gallery['photos_count'] }} {{ $gallery['photos_count'] == 1 ? 'foto' : 'fotos' }}
+                        </span>
+                    @endif
+                    <h5 style="margin:0; font-size:0.9rem; font-weight:700; color:#222; line-height:1.3;">
+                        {{ $gallery['title'] }}
+                    </h5>
+                    @if(!empty($gallery['description']))
+                        <p style="margin:4px 0 0; font-size:0.78rem; color:#666; line-height:1.4;">
+                            {{ \Illuminate\Support\Str::limit($gallery['description'], 70) }}
+                        </p>
+                    @endif
+                </div>
+            </a>
+            @endforeach
+        </div>
+    </div>
+    @endif
+
     {{-- ── Rodapé da seção ── --}}
     <div class="text-center mt-12">
         <h3 class="font-heading text-xl font-semibold text-[#202020] mb-1">@quintobprvpmesp</h3>

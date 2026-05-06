@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AppointmentController;
 use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
@@ -21,7 +22,7 @@ Route::view('/contato.php', 'public.contato')->name('public.contato');
 Route::view('/galerias.php', 'public.galerias')->name('public.galerias');
 Route::view('/memorial.php', 'public.memorial')->name('public.memorial');
 Route::view('/tor.php', 'public.tor')->name('public.tor');
-Route::view('/noticias.php', 'public.noticias')->name('public.noticias');
+Route::get('/noticias.php', [PostController::class, 'noticias'])->name('public.noticias');
 
 
 // ─── ROTEAMENTO DINÂMICO (Compatibilidade PMESP) ───
@@ -32,10 +33,10 @@ Route::get('/', function () {
     if (defined('MODO_MEMORIAL')) return view('public.memorial');
     if (defined('MODO_TOR'))      return view('public.tor');
     if (defined('MODO_GALERIAS')) return view('public.galerias');
-    if (defined('MODO_NOTICIAS')) return view('public.noticias');
+    if (defined('MODO_NOTICIAS')) return app(PostController::class)->noticias();
 
     
-    return app(\App\Http\Controllers\Site\HomeController::class)->index();
+    return app(HomeController::class)->index();
 })->name('public.home');
 
 Route::get('/publicacoes', [PostController::class, 'index'])->name('public.posts.index');
@@ -53,6 +54,9 @@ Route::prefix('admin')->name('admin.')->middleware('auth')->group(function () {
     Route::resource('pages', AdminPageController::class)->except('show');
     Route::resource('galleries', AdminGalleryController::class)->except('show');
     Route::delete('galleries/{gallery}/photos/{photo}', [AdminGalleryController::class, 'destroyPhoto'])->name('galleries.photos.destroy');
+    Route::get('appointments', [AppointmentController::class, 'index'])->name('appointments.index');
+    Route::patch('appointments/{appointment}/status', [AppointmentController::class, 'updateStatus'])->name('appointments.update-status');
+    Route::delete('appointments/{appointment}', [AppointmentController::class, 'destroy'])->name('appointments.destroy');
 });
 
 Route::prefix('admin')->name('admin.')->middleware(['auth', 'admin'])->group(function () {

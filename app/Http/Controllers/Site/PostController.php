@@ -13,7 +13,19 @@ class PostController extends Controller
     public function index(): View
     {
         return view('public.posts.index', [
-            'settings' => $this->portalSettings(),
+            'posts' => $this->publishedPosts(),
+        ]);
+    }
+
+    public function noticias(): View
+    {
+        return view('public.noticias', [
+            'featuredPosts' => Post::query()
+                ->where('status', 'published')
+                ->where('is_featured', true)
+                ->orderByDesc('published_at')
+                ->limit(2)
+                ->get(),
             'posts' => $this->publishedPosts(),
         ]);
     }

@@ -1,55 +1,205 @@
 @extends('layouts.apple')
 
-@section('title', 'Galerias do 5º BPRv')
+@section('title', 'Galerias | 5º BPRv')
+
+@section('styles')
+<style>
+    :root {
+        --gold: #d5aa32;
+        --black: #050505;
+        --card: #111111;
+        --border: rgba(213, 170, 50, 0.15);
+    }
+
+    html body {
+        background-color: var(--black) !important;
+        background: var(--black) !important;
+        color: #ffffff;
+    }
+
+    .gallery-hero {
+        padding: 5rem 1rem 7rem;
+        text-align: center;
+        background: radial-gradient(circle at center, rgba(213,170,50,0.07), transparent 70%);
+    }
+
+    .page-label {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 6px;
+        color: var(--gold);
+        margin-bottom: 1rem;
+        display: block;
+    }
+
+    .page-title {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: clamp(3rem, 8vw, 5rem);
+        font-weight: 900;
+        letter-spacing: -2px;
+        line-height: 0.9;
+        background: linear-gradient(to bottom, #ffffff 50%, #888 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .galleries-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2rem;
+        padding-bottom: 6rem;
+    }
+
+    .gallery-card {
+        background: var(--card);
+        border-radius: 20px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        transition: all 0.35s ease;
+        text-decoration: none;
+        color: inherit;
+        display: block;
+    }
+
+    .gallery-card:hover {
+        background: #161616;
+        border-color: rgba(213,170,50,0.35);
+        color: inherit;
+        text-decoration: none;
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+
+    .gallery-card-image {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        opacity: 0.75;
+        transition: opacity 0.35s;
+        display: block;
+    }
+
+    .gallery-card:hover .gallery-card-image { opacity: 1; }
+
+    .gallery-card-placeholder {
+        width: 100%;
+        height: 220px;
+        background: linear-gradient(135deg, #1a1a1a, #222);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .gallery-card-body { padding: 1.75rem; }
+
+    .gallery-card-count {
+        font-size: 0.7rem;
+        color: var(--gold);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        margin-bottom: 0.6rem;
+        display: block;
+    }
+
+    .gallery-card-title {
+        font-family: 'Barlow Condensed', sans-serif;
+        font-size: 1.4rem;
+        font-weight: 700;
+        line-height: 1.2;
+        color: #fff;
+        margin-bottom: 0.6rem;
+    }
+
+    .gallery-card-desc {
+        color: #555;
+        font-size: 0.88rem;
+        line-height: 1.6;
+        margin-bottom: 1.25rem;
+    }
+
+    .gallery-card-cta {
+        color: var(--gold);
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    footer {
+        background-color: var(--black) !important;
+        border-top: 1px solid rgba(255,255,255,0.05) !important;
+        color: #555 !important;
+    }
+</style>
+@endsection
 
 @section('content')
-    <section class="container py-5 my-5">
-        <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-end gap-3 mb-5 reveal active">
-            <div>
-                <h1 class="display-4 fw-bold mb-0" style="letter-spacing: -1.5px;">Galerias</h1>
-                <p class="fs-5 text-muted mt-2">Registros visuais das operações e solenidades do nosso batalhão.</p>
-            </div>
-            <a href="{{ route('public.home') }}" class="btn btn-dark rounded-pill px-4 py-2 fw-semibold shadow-sm">
-                Voltar à Home
+<main>
+
+    <div class="gallery-hero">
+        <span class="page-label">Portal 5º BPRv</span>
+        <h1 class="page-title">GALERIAS</h1>
+        <p style="color: #444; font-style: italic; margin-top: 1rem; font-size: 1rem;">
+            Registros visuais das operações e solenidades do batalhão.
+        </p>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4">
+
+        <div class="flex items-center gap-4 mb-10" style="margin-top: -3rem;">
+            <h2 style="font-family: 'Barlow Condensed', sans-serif; font-size: 1.1rem;
+                       font-weight: 900; letter-spacing: 3px; text-transform: uppercase;
+                       color: #fff; margin: 0; white-space: nowrap;">
+                ÁLBUNS INSTITUCIONAIS
+            </h2>
+            <div class="flex-grow" style="height: 1px; background: rgba(255,255,255,0.07);"></div>
+            @if($galleries->total() > 0)
+                <span style="font-size: 0.75rem; color: #444; white-space: nowrap;">
+                    {{ $galleries->total() }} {{ $galleries->total() == 1 ? 'álbum' : 'álbuns' }}
+                </span>
+            @endif
+        </div>
+
+        @if($galleries->isNotEmpty())
+        <div class="galleries-grid">
+            @foreach($galleries as $gallery)
+            <a href="{{ route('public.galleries.show', $gallery) }}" class="gallery-card">
+                @if($gallery->cover_image_path)
+                    <img src="{{ \Illuminate\Support\Facades\Storage::url($gallery->cover_image_path) }}"
+                         class="gallery-card-image" alt="{{ $gallery->title }}">
+                @else
+                    <div class="gallery-card-placeholder">
+                        <img src="{{ asset('imagens/logos/logo_5rv.png') }}"
+                             style="height: 38px; opacity: 0.1;" alt="">
+                    </div>
+                @endif
+                <div class="gallery-card-body">
+                    <span class="gallery-card-count">
+                        {{ $gallery->photos_count }} {{ $gallery->photos_count == 1 ? 'foto' : 'fotos' }}
+                    </span>
+                    <h3 class="gallery-card-title">{{ $gallery->title }}</h3>
+                    @if($gallery->description)
+                        <p class="gallery-card-desc">{{ Str::limit($gallery->description, 100) }}</p>
+                    @endif
+                    <span class="gallery-card-cta">Ver galeria →</span>
+                </div>
             </a>
+            @endforeach
         </div>
 
-        <div class="row g-4">
-            @forelse ($galleries as $gallery)
-                <div class="col-lg-4 reveal active">
-                    <article class="card bento-card shadow-sm h-100 border-0">
-                        <a href="{{ route('public.galleries.show', $gallery) }}" class="text-decoration-none text-dark h-100 d-flex flex-column">
-                            <div class="bento-img-container" style="height: 280px;">
-                                @if ($gallery->cover_image_path)
-                                    <img src="{{ \Illuminate\Support\Facades\Storage::url($gallery->cover_image_path) }}" 
-                                         class="w-100 h-100 object-fit-cover" alt="{{ $gallery->title }}">
-                                @else
-                                    <div class="w-100 h-100 bg-dark d-flex align-items-center justify-content-center">
-                                        <img src="{{ asset('imagens/logos/logo_5rv.png') }}" class="w-25 opacity-25" alt="5º BPRv">
-                                    </div>
-                                @endif
-                            </div>
-                            <div class="card-body p-4">
-                                <span class="text-uppercase fw-bold small mb-2 d-block" style="color: #86868b; letter-spacing: 1px;">
-                                    {{ $gallery->photos_count }} {{ $gallery->photos_count == 1 ? 'Foto' : 'Fotos' }}
-                                </span>
-                                <h3 class="card-title fw-bold fs-4 mb-2" style="letter-spacing: -0.5px;">{{ $gallery->title }}</h3>
-                                <p class="card-text text-muted small">{{ Str::limit($gallery->description, 100) }}</p>
-                            </div>
-                        </a>
-                    </article>
-                </div>
-            @empty
-                <div class="col-12 text-center py-5">
-                    <div class="display-6 text-muted">Nenhuma galeria disponível no momento.</div>
-                </div>
-            @endforelse
-        </div>
-
-        @if ($galleries->hasPages())
-            <div class="pt-5 mt-5 d-flex justify-content-center">
+        @if($galleries->hasPages())
+            <div class="flex justify-center pb-16">
                 {{ $galleries->links() }}
             </div>
         @endif
-    </section>
+
+        @else
+        <div class="text-center py-24">
+            <p style="color: #333; font-size: 1.1rem;">Nenhuma galeria disponível no momento.</p>
+        </div>
+        @endif
+
+    </div>
+</main>
 @endsection
