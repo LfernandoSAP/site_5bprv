@@ -49,5 +49,40 @@
             <section class="col p-4 p-lg-5">@yield('content')</section>
         </div>
     </div>
+<script>
+(function () {
+    const base = '{{ config("app.url") }}';
+    const adminBase = base + '/admin';
+
+    function toProxy(url) {
+        const path = url.replace(base + '/', '');
+        return base + '/admin-go.php?path=' + encodeURIComponent(path);
+    }
+
+    function needsProxy(url) {
+        return url && url.startsWith(adminBase) && !url.includes('.php') && !url.startsWith('#');
+    }
+
+    // Intercept link clicks
+    document.addEventListener('click', function (e) {
+        const a = e.target.closest('a[href]');
+        if (!a) return;
+        if (needsProxy(a.href)) {
+            e.preventDefault();
+            window.location.href = toProxy(a.href);
+        }
+    }, true);
+
+    // Intercept form submissions
+    document.addEventListener('submit', function (e) {
+        const form = e.target;
+        if (needsProxy(form.action)) {
+            e.preventDefault();
+            form.action = toProxy(form.action);
+            form.submit();
+        }
+    }, true);
+})();
+</script>
 </body>
 </html>

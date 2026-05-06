@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\AdminRouteProxy;
 use App\Http\Middleware\EnsureAdmin;
 use App\Http\Middleware\SecurityHeaders;
 use Illuminate\Foundation\Application;
@@ -19,6 +20,7 @@ return Application::configure(basePath: dirname(__DIR__))
 
         $middleware->web(append: [
             SecurityHeaders::class,
+            AdminRouteProxy::class,
         ]);
 
         $middleware->redirectGuestsTo(fn () => url('login.php'));
