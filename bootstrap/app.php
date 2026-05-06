@@ -21,7 +21,7 @@ return Application::configure(basePath: dirname(__DIR__))
             SecurityHeaders::class,
         ]);
 
-        $middleware->redirectGuestsTo('/unidades/5bprv/login.php');
+        $middleware->redirectGuestsTo(fn () => url('login.php'));
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
