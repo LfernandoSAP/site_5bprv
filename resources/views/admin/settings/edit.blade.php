@@ -14,7 +14,7 @@
         <a href="{{ route('public.home') }}" class="px-4 py-3 border border-[#101010]/18 text-[#101010] rounded-full hover:bg-[#101010] hover:text-white transition">Ver portal público</a>
     </div>
 
-    <form method="POST" action="{{ route('admin.settings.update') }}">
+    <form method="POST" action="{{ ag('settings') }}">
         @csrf
         @method('PUT')
 
@@ -66,7 +66,7 @@
                     </div>
                     <div class="space-y-2">
                         <button type="submit" class="w-full px-4 py-3 bg-[#101010] text-white rounded-xl hover:bg-gray-900 transition">Salvar configurações</button>
-                        <a href="{{ route('admin.dashboard') }}" class="block w-full px-4 py-3 text-center border border-[#101010]/18 text-[#101010] rounded-xl hover:bg-[#101010] hover:text-white transition">Voltar ao dashboard</a>
+                        <a href="{{ url('admin.php') }}" class="block w-full px-4 py-3 text-center border border-[#101010]/18 text-[#101010] rounded-xl hover:bg-[#101010] hover:text-white transition">Voltar ao dashboard</a>
                     </div>
                 </div>
 

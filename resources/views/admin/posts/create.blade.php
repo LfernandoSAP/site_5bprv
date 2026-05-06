@@ -9,7 +9,7 @@
         <p class="text-[#6e6e6e] mb-0">Cadastre uma nova publicação institucional.</p>
     </div>
 
-    <form method="POST" action="{{ route('admin.posts.store') }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ ag('posts') }}" enctype="multipart/form-data">
         @csrf
         @include('admin.posts._form')
     </form>

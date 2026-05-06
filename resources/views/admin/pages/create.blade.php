@@ -9,7 +9,7 @@
         <p class="text-[#6e6e6e] mb-0">Cadastre uma nova página institucional para o portal.</p>
     </div>
 
-    <form method="POST" action="{{ route('admin.pages.store') }}">
+    <form method="POST" action="{{ ag('pages') }}">
         @csrf
         @include('admin.pages._form')
     </form>

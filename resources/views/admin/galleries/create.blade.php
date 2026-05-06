@@ -9,7 +9,7 @@
         <p class="text-[#6e6e6e] mb-0">Cadastre um novo álbum de fotos do portal.</p>
     </div>
 
-    <form method="POST" action="{{ route('admin.galleries.store') }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ ag('galleries') }}" enctype="multipart/form-data">
         @csrf
         @include('admin.galleries._form')
     </form>

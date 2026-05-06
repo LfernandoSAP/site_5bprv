@@ -9,7 +9,7 @@
         <p class="text-[#6e6e6e] mb-0">Atualize o destaque selecionado para a home do portal.</p>
     </div>
 
-    <form method="POST" action="{{ route('admin.banners.update', $banner) }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ ag('banners/' . $banner->id) }}" enctype="multipart/form-data">
         @csrf
         @method('PUT')
         @include('admin.banners._form')

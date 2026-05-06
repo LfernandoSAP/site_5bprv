@@ -11,7 +11,7 @@
             <h1 class="font-heading text-5xl mb-1">Páginas institucionais</h1>
             <p class="text-[#6e6e6e] mb-0">Gerencie páginas permanentes como histórico, área de atuação e conteúdo institucional.</p>
         </div>
-        <a href="{{ route('admin.pages.create') }}" class="px-4 py-3 bg-[#101010] text-white rounded-full">Nova página</a>
+        <a href="{{ ag('pages/create') }}" class="px-4 py-3 bg-[#101010] text-white rounded-full">Nova página</a>
     </div>
 
     <div class="admin-card p-4">
@@ -42,8 +42,8 @@
                             <td class="py-3 px-2 text-sm text-[#6e6e6e]">{{ optional($page->published_at)->format('d/m/Y H:i') ?? 'Não publicada' }}</td>
                             <td class="py-3 px-2 text-right">
                                 <div class="inline-flex gap-2">
-                                    <a href="{{ route('admin.pages.edit', $page) }}" class="px-3 py-1.5 text-sm border border-[#101010]/18 text-[#101010] rounded-full hover:bg-[#101010] hover:text-white transition">Editar</a>
-                                    <form method="POST" action="{{ route('admin.pages.destroy', $page) }}" onsubmit="return confirm('Deseja remover esta página?');">
+                                    <a href="{{ ag('pages/' . $page->id . '/edit') }}" class="px-3 py-1.5 text-sm border border-[#101010]/18 text-[#101010] rounded-full hover:bg-[#101010] hover:text-white transition">Editar</a>
+                                    <form method="POST" action="{{ ag('pages/' . $page->id) }}" onsubmit="return confirm('Deseja remover esta página?');">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="px-3 py-1.5 text-sm border border-red-300 text-red-600 rounded-full hover:bg-red-600 hover:text-white hover:border-red-600 transition">Excluir</button>

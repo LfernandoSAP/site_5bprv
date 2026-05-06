@@ -76,7 +76,7 @@
                                         <button @click="open = !open" class="px-3 py-1.5 text-xs bg-white border border-gray-200 rounded-full hover:border-[#d5aa32] transition shadow-sm font-bold">Status</button>
                                         <div x-show="open" @click.away="open = false" class="absolute right-0 mt-2 w-40 bg-[#101010] rounded-2xl shadow-xl z-10 overflow-hidden border border-white/10" x-cloak>
                                             @foreach(['pending', 'confirmed', 'cancelled', 'completed'] as $st)
-                                                <form method="POST" action="{{ route('admin.appointments.update-status', $appointment) }}">
+                                                <form method="POST" action="{{ ag('appointments/' . $appointment->id . '/status') }}">
                                                     @csrf
                                                     @method('PATCH')
                                                     <input type="hidden" name="status" value="{{ $st }}">
@@ -85,7 +85,7 @@
                                             @endforeach
                                         </div>
                                     </div>
-                                    <form method="POST" action="{{ route('admin.appointments.destroy', $appointment) }}" onsubmit="return confirmDelete(this, 'Remover Agendamento', 'Deseja excluir este registro de agendamento permanentemente?');">
+                                    <form method="POST" action="{{ ag('appointments/' . $appointment->id) }}" onsubmit="return confirmDelete(this, 'Remover Agendamento', 'Deseja excluir este registro de agendamento permanentemente?');">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="p-1.5 text-red-600 hover:bg-red-50 rounded-full transition" title="Excluir">

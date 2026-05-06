@@ -11,7 +11,7 @@
             <h1 class="font-heading text-5xl mb-1">Notícias e publicações</h1>
             <p class="text-[#6e6e6e] mb-0">Gerencie o conteúdo jornalístico e institucional do portal.</p>
         </div>
-        <a href="{{ route('admin.posts.create') }}" class="px-4 py-3 bg-[#101010] text-white rounded-full whitespace-nowrap">Nova notícia</a>
+        <a href="{{ ag('posts/create') }}" class="px-4 py-3 bg-[#101010] text-white rounded-full whitespace-nowrap">Nova notícia</a>
     </div>
 
     <div class="admin-card p-4">
@@ -44,8 +44,8 @@
                             <td class="py-3 px-2 text-sm">{{ $post->is_featured ? 'Sim' : 'Não' }}</td>
                             <td class="py-3 px-2 text-right">
                                 <div class="inline-flex gap-2">
-                                    <a href="{{ route('admin.posts.edit', $post) }}" class="px-3 py-1.5 text-sm border border-[#101010]/18 text-[#101010] rounded-full hover:bg-[#101010] hover:text-white transition">Editar</a>
-                                    <form method="POST" action="{{ route('admin.posts.destroy', $post) }}" onsubmit="return confirm('Deseja remover esta notícia?');">
+                                    <a href="{{ ag('posts/' . $post->id . '/edit') }}" class="px-3 py-1.5 text-sm border border-[#101010]/18 text-[#101010] rounded-full hover:bg-[#101010] hover:text-white transition">Editar</a>
+                                    <form method="POST" action="{{ ag('posts/' . $post->id) }}" onsubmit="return confirm('Deseja remover esta notícia?');">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="px-3 py-1.5 text-sm border border-red-300 text-red-600 rounded-full hover:bg-red-600 hover:text-white hover:border-red-600 transition">Excluir</button>

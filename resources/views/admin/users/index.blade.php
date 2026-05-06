@@ -11,7 +11,7 @@
             <h1 class="font-heading text-5xl mb-1">Usuários do portal</h1>
             <p class="text-[#6e6e6e] mb-0">Gerencie administradores e editores com controle simples de perfil e status de acesso.</p>
         </div>
-        <a href="{{ route('admin.users.create') }}" class="px-4 py-3 bg-[#101010] text-white rounded-full">Novo usuário</a>
+        <a href="{{ ag('users/create') }}" class="px-4 py-3 bg-[#101010] text-white rounded-full">Novo usuário</a>
     </div>
 
     <div class="admin-card p-4">
@@ -50,9 +50,9 @@
                             <td class="py-3 px-2 text-sm text-[#6e6e6e]">{{ optional($user->last_login_at)->format('d/m/Y H:i') ?? 'Sem registro' }}</td>
                             <td class="py-3 px-2 text-right">
                                 <div class="inline-flex gap-2">
-                                    <a href="{{ route('admin.users.edit', $user) }}" class="px-3 py-1.5 text-sm border border-[#101010]/18 text-[#101010] rounded-full hover:bg-[#101010] hover:text-white transition">Editar</a>
+                                    <a href="{{ ag('users/' . $user->id . '/edit') }}" class="px-3 py-1.5 text-sm border border-[#101010]/18 text-[#101010] rounded-full hover:bg-[#101010] hover:text-white transition">Editar</a>
                                     @if (! auth()->user()->is($user))
-                                        <form method="POST" action="{{ route('admin.users.destroy', $user) }}" onsubmit="return confirm('Deseja remover este usuário?');">
+                                        <form method="POST" action="{{ ag('users/' . $user->id) }}" onsubmit="return confirm('Deseja remover este usuário?');">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="px-3 py-1.5 text-sm border border-red-300 text-red-600 rounded-full hover:bg-red-600 hover:text-white hover:border-red-600 transition">Excluir</button>

@@ -9,7 +9,7 @@
         <p class="text-[#6e6e6e] mb-0">Crie uma nova conta administrativa para operação do portal.</p>
     </div>
 
-    <form method="POST" action="{{ route('admin.users.store') }}">
+    <form method="POST" action="{{ ag('users') }}">
         @csrf
         @include('admin.users._form')
     </form>

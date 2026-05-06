@@ -9,7 +9,7 @@
         <p class="text-[#6e6e6e] mb-0">Cadastre um novo destaque para a home do portal.</p>
     </div>
 
-    <form method="POST" action="{{ route('admin.banners.store') }}" enctype="multipart/form-data">
+    <form method="POST" action="{{ ag('banners') }}" enctype="multipart/form-data">
         @csrf
         @include('admin.banners._form')
     </form>

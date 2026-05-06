@@ -11,7 +11,7 @@
             <h1 class="font-heading text-5xl mb-1">Galerias</h1>
             <p class="text-[#6e6e6e] mb-0">Organize álbuns de fotos e seus destaques institucionais.</p>
         </div>
-        <a href="{{ route('admin.galleries.create') }}" class="px-4 py-3 bg-[#101010] text-white rounded-full">Nova galeria</a>
+        <a href="{{ ag('galleries/create') }}" class="px-4 py-3 bg-[#101010] text-white rounded-full">Nova galeria</a>
     </div>
 
     <div class="admin-card p-4">
@@ -44,8 +44,8 @@
                             <td class="py-3 px-2 text-sm text-[#6e6e6e]">{{ optional($gallery->published_at)->format('d/m/Y H:i') ?? 'Não publicada' }}</td>
                             <td class="py-3 px-2 text-right">
                                 <div class="inline-flex gap-2">
-                                    <a href="{{ route('admin.galleries.edit', $gallery) }}" class="px-3 py-1.5 text-sm border border-[#101010]/18 text-[#101010] rounded-full hover:bg-[#101010] hover:text-white transition">Editar</a>
-                                    <form method="POST" action="{{ route('admin.galleries.destroy', $gallery) }}" onsubmit="return confirm('Deseja remover esta galeria?');">
+                                    <a href="{{ ag('galleries/' . $gallery->id . '/edit') }}" class="px-3 py-1.5 text-sm border border-[#101010]/18 text-[#101010] rounded-full hover:bg-[#101010] hover:text-white transition">Editar</a>
+                                    <form method="POST" action="{{ ag('galleries/' . $gallery->id) }}" onsubmit="return confirm('Deseja remover esta galeria?');">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="px-3 py-1.5 text-sm border border-red-300 text-red-600 rounded-full hover:bg-red-600 hover:text-white hover:border-red-600 transition">Excluir</button>

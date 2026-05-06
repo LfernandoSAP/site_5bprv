@@ -9,7 +9,7 @@
         <p class="text-[#6e6e6e] mb-0">Atualize perfil, status de acesso e credenciais da conta selecionada.</p>
     </div>
 
-    <form method="POST" action="{{ route('admin.users.update', $user) }}">
+    <form method="POST" action="{{ ag('users/' . $user->id) }}">
         @csrf
         @method('PUT')
         @include('admin.users._form')
