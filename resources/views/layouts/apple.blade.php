@@ -184,6 +184,7 @@
                 <li><a class="nav-link-apple {{ defined('MODO_REDES') ? 'active' : '' }}" href="{{ env('APP_URL') }}/redes-sociais.php" style="font-size: 1.035rem; line-height: 35px;">Redes Sociais</a></li>
                 <li><a class="nav-link-apple {{ defined('MODO_NOTICIAS') || request()->is('publicacoes*') ? 'active' : '' }}" href="{{ env('APP_URL') }}/noticias.php" style="font-size: 1.035rem; line-height: 35px;">Notícias</a></li>
                 <li><a class="nav-link-apple {{ defined('MODO_CONTATO') ? 'active' : '' }}" href="{{ env('APP_URL') }}/contato.php" style="font-size: 1.035rem; line-height: 35px;">Contato</a></li>
+                <li><a class="nav-link-apple {{ defined('MODO_LINKS') ? 'active' : '' }}" href="{{ env('APP_URL') }}/links-importantes.php" style="font-size: 1.035rem; line-height: 35px;">Links Importantes</a></li>
             </ul>
 
             <div style="width: 100px; display: flex; justify-content: flex-end;">
@@ -199,7 +200,7 @@
 
     <footer class="py-12 text-center mt-12 bg-[#f5f5f7] border-t border-[#d2d2d7] text-[#86868b]" style="background-color: #f5f5f7;">
         <div class="max-w-7xl mx-auto px-4">
-            <p class="mb-2 text-sm">Este é o Portal Institucional Oficial do 5º Batalhão de Polícia Rodoviária.</p>
+            <p class="mb-2 text-sm" style="color: #9e9e9e;">Este é o Portal Institucional Oficial do 5º Batalhão de Polícia Rodoviária.</p>
             <small class="block">&copy; {{ date('Y') }} Polícia Militar do Estado de São Paulo. Todos os direitos reservados - Desenvolvedor Cb PM F. Gonçalves (15) 99704-3077</small>
         </div>
     </footer>

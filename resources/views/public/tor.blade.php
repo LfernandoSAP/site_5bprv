@@ -318,28 +318,40 @@
 
     <!-- Cards de Missão -->
     <section class="mission-grid">
-        <div class="mission-card">
-            <span class="mission-icon">⚡</span>
-            <h3 class="mission-name">Pronta Resposta</h3>
-            <p class="mission-desc">
-                Intervenção imediata em ocorrências de alto risco. O TOR é acionado quando a precisão técnica e a superioridade tática são indispensáveis.
-            </p>
+        <div class="mission-card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column; height: 420px;">
+            <img src="{{ asset('imagens/TOR/r-05493.jpeg') }}" alt="Pronta Resposta"
+                 style="width:100%; height:80%; object-fit:cover; display:block; flex-shrink:0;">
+            <div style="height:20%; padding: 10px 20px; display:flex; flex-direction:column; justify-content:center; gap:2px;">
+                <span class="mission-icon" style="font-size:1.2rem; margin-bottom:0;">⚡</span>
+                <h3 class="mission-name" style="margin:0; font-size:0.95rem;">Pronta Resposta</h3>
+                <p class="mission-desc" style="margin:0; font-size:0.75rem; line-height:1.3; overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;">
+                    Intervenção imediata em ocorrências de alto risco. O TOR é acionado quando a precisão técnica e a superioridade tática são indispensáveis.
+                </p>
+            </div>
         </div>
 
-        <div class="mission-card">
-            <span class="mission-icon">🎯</span>
-            <h3 class="mission-name">Combate ao Crime</h3>
-            <p class="mission-desc">
-                Especialistas em interceptação de ilícitos, tráfico de drogas e armas. Vigilância constante nos corredores logísticos do Sudoeste Paulista.
-            </p>
+        <div class="mission-card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column; height: 420px;">
+            <img src="{{ asset('imagens/TOR/tor-news1.jpg') }}" alt="Combate ao Crime"
+                 style="width:100%; height:80%; object-fit:cover; display:block; flex-shrink:0;">
+            <div style="height:20%; padding: 10px 20px; display:flex; flex-direction:column; justify-content:center; gap:2px;">
+                <span class="mission-icon" style="font-size:1.2rem; margin-bottom:0;">🎯</span>
+                <h3 class="mission-name" style="margin:0; font-size:0.95rem;">Combate ao Crime</h3>
+                <p class="mission-desc" style="margin:0; font-size:0.75rem; line-height:1.3; overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;">
+                    Especialistas em interceptação de ilícitos, tráfico de drogas e armas. Vigilância constante nos corredores logísticos do Sudoeste Paulista.
+                </p>
+            </div>
         </div>
 
-        <div class="mission-card">
-            <span class="mission-icon">🛡️</span>
-            <h3 class="mission-name">Patrulhamento</h3>
-            <p class="mission-desc">
-                Presença ostensiva em pontos estratégicos. A doutrina de patrulhamento tático garante a segurança em condições de extrema adversidade.
-            </p>
+        <div class="mission-card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column; height: 420px;">
+            <img src="{{ asset('imagens/TOR/tor01.png') }}" alt="Patrulhamento"
+                 style="width:100%; height:80%; object-fit:cover; display:block; flex-shrink:0;">
+            <div style="height:20%; padding: 10px 20px; display:flex; flex-direction:column; justify-content:center; gap:2px;">
+                <span class="mission-icon" style="font-size:1.2rem; margin-bottom:0;">🛡️</span>
+                <h3 class="mission-name" style="margin:0; font-size:0.95rem;">Patrulhamento</h3>
+                <p class="mission-desc" style="margin:0; font-size:0.75rem; line-height:1.3; overflow:hidden; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical;">
+                    Presença ostensiva em pontos estratégicos. A doutrina de patrulhamento tático garante a segurança em condições de extrema adversidade.
+                </p>
+            </div>
         </div>
     </section>
 
@@ -401,7 +413,7 @@
     <!-- Slogan Final -->
     <section class="py-32 text-center bg-black">
         <h2 class="slogan-history" style="font-family: 'Barlow Condensed', sans-serif; font-size: 3.5rem; font-weight: 900; opacity: 0.9;">
-            T.O.R. — SEGURANÇA NAS RODOVIAS PAULISTAS.
+            TOR — SEGURANÇA NAS RODOVIAS PAULISTAS.
         </h2>
     </section>
 
@@ -420,7 +432,7 @@
         const lightbox = document.getElementById('torLightbox');
         const lightboxImg = document.getElementById('lightboxImg');
         const closeBtn = document.querySelector('.lightbox-close');
-        const images = document.querySelectorAll('.bento-item img, .impact-content img');
+        const images = document.querySelectorAll('.bento-item img, .impact-content img, .mission-card img');
 
         images.forEach(img => {
             img.style.cursor = 'zoom-in';

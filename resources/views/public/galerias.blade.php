@@ -227,7 +227,7 @@
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 lg:gap-8">
               @php
               $comandantes = [
-                ['rank' => 'Comandante Interino',  'periodo' => '02/04/2026 à Atual',        'nome' => 'Maj PM Eric Tadeu dos Santos',            'slug' => null,             'ajuste' => 'transform: scale(0.37);'],
+                ['rank' => 'Comandante Interino',  'periodo' => '02/04/2026 à Atual',        'nome' => '...',            'slug' => null,             'ajuste' => 'transform: scale(0.37);'],
                 ['rank' => 'Eterno Comandante',   'periodo' => '29/05/2024 à 01/04/2026',    'nome' => 'Ten Cel PM Julio Teodoro Martins Junior', 'slug' => 'Julio.jpeg',     'ajuste' => 'transform: scale(0.5);'],
                 ['rank' => 'Eterno Comandante',   'periodo' => '27/02/2023 à 28/05/2024',    'nome' => 'Ten Cel PM Marcel Ribeiro de Lima',       'slug' => 'marcel.jpeg',    'ajuste' => 'transform: scale(0.27);'],
                 ['rank' => 'Eterno Comandante',   'periodo' => '25/08/2020 à 07/02/2023',    'nome' => 'Ten Cel PM Hugo Araujo Santos',           'slug' => 'hugo.jpeg',      'ajuste' => 'transform: scale(0.3);'],

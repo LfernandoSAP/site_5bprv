@@ -21,6 +21,7 @@ Route::view('/contato.php', 'public.contato')->name('public.contato');
 Route::view('/galerias.php', 'public.galerias')->name('public.galerias');
 Route::view('/memorial.php', 'public.memorial')->name('public.memorial');
 Route::view('/tor.php', 'public.tor')->name('public.tor');
+Route::view('/links-importantes.php', 'public.links-importantes')->name('public.links-importantes');
 Route::get('/noticias.php', [PostController::class, 'noticias'])->name('public.noticias');
 
 
@@ -33,6 +34,7 @@ Route::get('/', function () {
     if (defined('MODO_TOR'))      return view('public.tor');
     if (defined('MODO_GALERIAS')) return view('public.galerias');
     if (defined('MODO_NOTICIAS')) return app(PostController::class)->noticias();
+    if (defined('MODO_LINKS'))    return view('public.links-importantes');
 
     
     return app(HomeController::class)->index();

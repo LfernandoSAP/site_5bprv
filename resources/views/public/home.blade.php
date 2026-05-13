@@ -3,513 +3,641 @@
 @section('title', 'Início | 5º BPRv - Polícia Rodoviária')
 
 @section('styles')
-<style>
-    .font-heading { font-family: 'Barlow Condensed', sans-serif; }
-    .font-body    { font-family: 'Source Sans 3', sans-serif; }
+    <style>
+        .font-heading {
+            font-family: 'Barlow Condensed', sans-serif;
+        }
 
-    .multi-item-card {
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.10);
-        transition: transform 0.3s ease;
-        background: #ffffff;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-    .multi-item-card:hover { transform: translateY(-3px); }
+        .font-body {
+            font-family: 'Source Sans 3', sans-serif;
+        }
 
-    .multi-item-img {
-        width: 100%;
-        height: 380px;
-        object-fit: cover;
-        display: block;
-        border-radius: 10px 10px 0 0;
-    }
+        .multi-item-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.10);
+            transition: transform 0.3s ease;
+            background: #ffffff;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
 
-    .multi-item-caption {
-        width: 100%;
-        padding: 10px 15px !important;
-        background: linear-gradient(to bottom, #f0f0f0, #c0c0c0);
-        text-align: center;
-        border-top: 1px solid #d0d0d0;
-        border-radius: 0 0 10px 10px;
-        flex-grow: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .multi-item-caption h5 {
-        color: #333333;
-        font-family: 'Source Sans 3', sans-serif;
-        font-size: 0.95rem;
-        font-weight: 700;
-        margin: 0;
-        letter-spacing: 0.3px;
-    }
+        .multi-item-card:hover {
+            transform: translateY(-3px);
+        }
 
-    .bento-slide { display: none; }
-    .bento-slide.active { display: block; }
+        .multi-item-img {
+            width: 100%;
+            height: 380px;
+            object-fit: cover;
+            display: block;
+            border-radius: 10px 10px 0 0;
+        }
 
-    .carousel-grid {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 24px;
-        width: 100%;
-    }
-    @media (max-width: 767px) {
-        .carousel-grid { grid-template-columns: 1fr; }
-        .multi-item-img { height: 240px; }
-    }
-    @media (min-width: 768px) and (max-width: 1023px) {
-        .carousel-grid { grid-template-columns: repeat(2, 1fr); }
-    }
+        .multi-item-caption {
+            width: 100%;
+            padding: 10px 15px !important;
+            background: linear-gradient(to bottom, #f0f0f0, #c0c0c0);
+            text-align: center;
+            border-top: 1px solid #d0d0d0;
+            border-radius: 0 0 10px 10px;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
 
-    .bento-dots { display: flex; justify-content: center; gap: 8px; margin-top: 16px; }
-    .bento-dot {
-        width: 10px; height: 10px;
-        border-radius: 50%;
-        background: #ccc;
-        border: none;
-        cursor: pointer;
-        transition: background 0.3s, transform 0.2s;
-        padding: 0;
-    }
-    .bento-dot.active { background: #d5aa32; transform: scale(1.3); }
+        .multi-item-caption h5 {
+            color: #333333;
+            font-family: 'Source Sans 3', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin: 0;
+            letter-spacing: 0.3px;
+        }
 
-    .slogan-absurdo {
-        position: relative;
-        text-align: center !important;
-        width: 100%;
-        display: block;
-        letter-spacing: 2px;
-        font-family: 'Barlow Condensed', sans-serif;
-        font-size: clamp(1.6rem, 3.5vw, 3rem);
-        font-weight: 900;
-        background: linear-gradient(90deg, #111110, #242218, #6b664c, #6e6320, #cfaf21);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8));
-        background-size: 300% auto;
-        opacity: 0;
-        transform: translateY(30px) scale(0.95);
-        animation: entradaBPRv 1s ease-out forwards, brilhoBPRv 5s linear infinite;
-    }
-    @keyframes entradaBPRv {
-        to { opacity: 1; transform: translateY(0) scale(1); }
-    }
-    @keyframes brilhoBPRv {
-        0%   { background-position: 0% center; }
-        100% { background-position: 300% center; }
-    }
-    .slogan-bprv::before {
-        content: "";
-        position: absolute; top: 0; left: -100%;
-        width: 60%; height: 100%;
-        background: linear-gradient(120deg, transparent, rgba(255,255,255,0.55), transparent);
-        animation: luzViatura 3.5s infinite;
-    }
-    @keyframes luzViatura {
-        0%   { left: -100%; }
-        100% { left: 150%; }
-    }
-    .slogan-bprv::after {
-        content: "";
-        display: block;
-        margin: 10px auto 0;
-        width: 120px; height: 3px;
-        background: linear-gradient(90deg, transparent, #ffd700, transparent);
-        animation: linhaOficial 3s ease-in-out infinite;
-    }
-    @keyframes linhaOficial {
-        0%   { width: 80px;  opacity: 0.4; }
-        50%  { width: 160px; opacity: 1;   }
-        100% { width: 80px;  opacity: 0.4; }
-    }
+        .bento-slide {
+            display: none;
+        }
 
-    /* ─── Rodovia: canvas ocupa 100% do pai ─── */
-    #rodoviaCanvas {
-        display: block;
-        width: 100%;
-        height: 90px; /* altura real do canvas dentro do padding */
-    }
+        .bento-slide.active {
+            display: block;
+        }
 
-    /* ─── Separador rodovia: Esticado até as bordas da tela ─── */
-    .rodovia-wrapper {
-        width: 100vw;
-        position: relative;
-        left: 50%;
-        right: 50%;
-        margin-left: -50vw;
-        margin-right: -50vw;
-        margin-top: 10px;
-        margin-bottom: 20px;
-        background: #383838;
-        border-radius: 0;
-        padding: 10px 0;
-        box-sizing: border-box;
-        overflow: hidden;
-    }
+        .carousel-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            width: 100%;
+        }
 
-    /* ─── Cards estáticos: força margem superior ─── */
-    .cards-estaticos {
-        margin-top: 0; /* já garantido pelo mb do rodovia-wrapper */
-    }
-</style>
+        @media (max-width: 767px) {
+            .carousel-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .multi-item-img {
+                height: 240px;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .carousel-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .bento-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 16px;
+        }
+
+        .bento-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ccc;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            padding: 0;
+        }
+
+        .bento-dot.active {
+            background: #d5aa32;
+            transform: scale(1.3);
+        }
+
+        .slogan-absurdo {
+            position: relative;
+            text-align: center !important;
+            width: 100%;
+            display: block;
+            letter-spacing: 2px;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: clamp(1.6rem, 3.5vw, 3rem);
+            font-weight: 900;
+            background: linear-gradient(90deg, #111110, #242218, #6b664c, #6e6320, #cfaf21);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.8));
+            background-size: 300% auto;
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+            animation: entradaBPRv 1s ease-out forwards, brilhoBPRv 5s linear infinite;
+        }
+
+        @keyframes entradaBPRv {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes brilhoBPRv {
+            0% {
+                background-position: 0% center;
+            }
+
+            100% {
+                background-position: 300% center;
+            }
+        }
+
+        .slogan-bprv::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 60%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.55), transparent);
+            animation: luzViatura 3.5s infinite;
+        }
+
+        @keyframes luzViatura {
+            0% {
+                left: -100%;
+            }
+
+            100% {
+                left: 150%;
+            }
+        }
+
+        .slogan-bprv::after {
+            content: "";
+            display: block;
+            margin: 10px auto 0;
+            width: 120px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #ffd700, transparent);
+            animation: linhaOficial 3s ease-in-out infinite;
+        }
+
+        @keyframes linhaOficial {
+            0% {
+                width: 80px;
+                opacity: 0.4;
+            }
+
+            50% {
+                width: 160px;
+                opacity: 1;
+            }
+
+            100% {
+                width: 80px;
+                opacity: 0.4;
+            }
+        }
+
+        /* ─── Rodovia: canvas ocupa 100% do pai ─── */
+        #rodoviaCanvas {
+            display: block;
+            width: 100%;
+            height: 90px;
+            /* altura real do canvas dentro do padding */
+        }
+
+        /* ─── Separador rodovia: Esticado até as bordas da tela ─── */
+        .rodovia-wrapper {
+            width: 100vw;
+            position: relative;
+            left: 50%;
+            right: 50%;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            margin-top: 10px;
+            margin-bottom: 20px;
+            background: #383838;
+            border-radius: 0;
+            padding: 10px 0;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        /* ─── Cards estáticos: força margem superior ─── */
+        .cards-estaticos {
+            margin-top: 0;
+            /* já garantido pelo mb do rodovia-wrapper */
+        }
+
+        /* ── Challenge Coin ── */
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Playfair+Display:wght@400;700&display=swap');
+
+        .font-charming {
+            font-family: 'Great Vibes', cursive !important;
+        }
+
+        .font-elegant {
+            font-family: 'Cormorant Garamond', serif !important;
+        }
+
+        .font-serif-playfair {
+            font-family: 'Playfair Display', serif !important;
+        }
+
+        .coin-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2.5rem;
+            margin-bottom: 1.5rem;
+            perspective: 1000px;
+        }
+
+        .coin-img {
+            width: 160px;
+            height: auto;
+            filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.6));
+            animation: coinFloat 4s ease-in-out infinite;
+        }
+
+        .coin-img:nth-child(2) {
+            animation-delay: -2s;
+        }
+
+        @keyframes coinFloat {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(0deg);
+            }
+
+            50% {
+                transform: translateY(-15px) rotate(3deg);
+            }
+        }
+
+        .shimmer-gold {
+            background: linear-gradient(to right, #d5aa32 20%, #fff7d1 40%, #d5aa32 60%, #fff7d1 80%, #d5aa32 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shine 4s linear infinite;
+        }
+
+        @keyframes shine {
+            to {
+                background-position: 200% center;
+            }
+        }
+    </style>
 @endsection
 
 @section('content')
-<section id="news" class="w-full px-4 md:px-12 py-12 mt-4">
+    <section id="news" class="w-full px-4 md:px-12 py-12 mt-4">
 
-    {{-- ── Slogan Institucional Animado ── --}}
-    <div class="flex items-center justify-center mb-12">
-        <div class="text-center">
-            <h2 class="slogan-absurdo">
-                5º BPRv — O GUARDIÃO DAS RODOVIAS DO SUDOESTE PAULISTA.
-            </h2>
-        </div>
-    </div>
-
-    {{-- ── Bento Slider ── --}}
-    <div id="bentoSlider" class="w-full overflow-hidden px-0 md:px-4">
-
-        {{-- Slide 1 --}}
-        <div class="bento-slide active">
-            <div class="carousel-grid">
-                <div class="multi-item-card">
-                    <img src="{{ asset('imagens/home/aereo2.jpeg') }}" class="multi-item-img" alt="Sede 5º BPRv">
-                    <div class="multi-item-caption"><h5>Sede 5º BPRv</h5></div>
-                </div>
-                <div class="multi-item-card">
-                    <img src="{{ asset('imagens/home/5rv_fachada2.jpeg') }}" class="multi-item-img" alt="Fachada">
-                    <div class="multi-item-caption"><h5>Orgulho em pertencer</h5></div>
-                </div>
-                <div class="multi-item-card">
-                    <img src="{{ asset('imagens/home/Motos01.jpg') }}" class="multi-item-img" alt="Motos">
-                    <div class="multi-item-caption"><h5>Tradição</h5></div>
-                </div>
+        {{-- ── Slogan Institucional Animado ── --}}
+        <div class="flex items-center justify-center mb-12">
+            <div class="text-center">
+                <h2 class="slogan-absurdo">
+                    5º BPRv — O GUARDIÃO DAS RODOVIAS DO SUDOESTE PAULISTA.
+                </h2>
             </div>
         </div>
 
-        {{-- Slide 2 --}}
-        <div class="bento-slide">
-            <div class="carousel-grid">
-                <div class="multi-item-card">
-                    <img src="{{ asset('imagens/home/Moto_basehistorica1.jpg') }}" class="multi-item-img" alt="Base Histórica">
-                    <div class="multi-item-caption"><h5>Preservação</h5></div>
-                </div>
-                <div class="multi-item-card">
-                    <img src="{{ asset('imagens/home/moto_botelho.jpg') }}" class="multi-item-img" alt="Moto">
-                    <div class="multi-item-caption"><h5>Profissionalismo</h5></div>
-                </div>
-                <div class="multi-item-card">
-                    <img src="{{ asset('imagens/home/tor1.jpeg') }}" class="multi-item-img" alt="TOR">
-                    <div class="multi-item-caption"><h5>Especializada TOR</h5></div>
-                </div>
-            </div>
-        </div>
+        {{-- ── Bento Slider ── --}}
+        <div id="bentoSlider" class="w-full overflow-hidden px-0 md:px-4">
 
-        {{-- Slide 3 --}}
-        <div class="bento-slide">
-            <div class="carousel-grid">
-                <div class="multi-item-card">
-                    <img src="{{ asset('imagens/home/91251f7a-335b-4fd8-83cb-ffb39e6c4833-1024x461.jpg') }}" class="multi-item-img" alt="Legado">
-                    <div class="multi-item-caption"><h5>Legado</h5></div>
-                </div>
-                <div class="multi-item-card">
-                    <img src="{{ asset('imagens/home/20211130_083808-1038x584.jpg') }}" class="multi-item-img" alt="Honra">
-                    <div class="multi-item-caption"><h5>Honra</h5></div>
-                </div>
-                <div class="multi-item-card">
-                    <img src="{{ asset('imagens/home/fachadaAereo.jpeg') }}" class="multi-item-img" alt="Excelência">
-                    <div class="multi-item-caption"><h5>Excelência</h5></div>
-                </div>
-            </div>
-        </div>
-
-        {{-- Slide 4 --}}
-        <div class="bento-slide">
-            <div class="carousel-grid">
-                <div class="multi-item-card">
-                    <img src="{{ asset('imagens/home/alik.JPG') }}" class="multi-item-img" alt="Profissionalismo">
-                    <div class="multi-item-caption"><h5>Profissionalismo</h5></div>
-                </div>
-                <div class="multi-item-card">
-                    <img src="{{ asset('imagens/home/camila.JPG') }}" class="multi-item-img" alt="Resiliência">
-                    <div class="multi-item-caption"><h5>Resiliência</h5></div>
-                </div>
-                <div class="multi-item-card">
-                    <img src="{{ asset('imagens/home/TOR.jpg') }}" class="multi-item-img" alt="Excelência">
-                    <div class="multi-item-caption"><h5>Excelência</h5></div>
-                </div>
-            </div>
-        </div>
-
-        {{-- Indicadores (bolinhas) --}}
-        <div class="bento-dots" id="bentoDots">
-            <button class="bento-dot active" data-index="0" aria-label="Slide 1"></button>
-            <button class="bento-dot" data-index="1" aria-label="Slide 2"></button>
-            <button class="bento-dot" data-index="2" aria-label="Slide 3"></button>
-            <button class="bento-dot" data-index="3" aria-label="Slide 4"></button>
-        </div>
-    </div>
-
-    {{-- ══ SEPARADOR: Rodovia Animada ══ --}}
-    <div class="rodovia-wrapper">
-        <canvas id="rodoviaCanvas"></canvas>
-    </div>
-
-    {{-- ── Três Cards Estáticos ── --}}
-    <div class="carousel-grid cards-estaticos">
-        <div class="multi-item-card">
-            <img src="{{ asset('imagens/home/qualidade2026.jpeg') }}" class="multi-item-img" alt="Qualidade">
-            <div class="multi-item-caption"><h5>Compromisso com a Qualidade</h5></div>
-        </div>
-        <div class="multi-item-card">
-            <img src="{{ asset('imagens/home/salaoperacoes1.jpeg') }}" class="multi-item-img" alt="Operações">
-            <div class="multi-item-caption"><h5>Tecnologia e Operações</h5></div>
-        </div>
-        <div class="multi-item-card">
-            <img src="{{ asset('imagens/home/heliponto.jpeg') }}" class="multi-item-img" alt="Infraestrutura">
-            <div class="multi-item-caption"><h5>Infraestrutura de Ponta</h5></div>
-        </div>
-    </div>
-
-    {{-- ── Últimas Notícias (dinâmico) ── --}}
-    @if(!empty($latestPosts))
-    <div class="mt-16">
-        <div class="flex items-center gap-4 mb-8">
-            <h2 class="font-heading text-2xl font-bold text-[#202020] whitespace-nowrap">ÚLTIMAS NOTÍCIAS</h2>
-            <div class="flex-grow" style="height:2px; background: linear-gradient(to right, #d5aa32, transparent);"></div>
-            <a href="{{ route('public.noticias') }}"
-               class="text-xs font-bold uppercase tracking-widest text-[#8a7a30] whitespace-nowrap hover:text-[#d5aa32] transition-colors">
-                Ver todas →
-            </a>
-        </div>
-        <div class="carousel-grid">
-            @foreach($latestPosts as $post)
-            <a href="{{ isset($post['slug']) && $post['slug'] ? route('public.posts.show', $post['slug']) : route('public.noticias') }}"
-               class="multi-item-card" style="text-decoration:none; color:inherit;">
-                @if(!empty($post['image_path']))
-                    <img src="{{ \Illuminate\Support\Facades\Storage::url($post['image_path']) }}"
-                         class="multi-item-img" alt="{{ $post['title'] }}">
-                @else
-                    <div class="multi-item-img" style="background: linear-gradient(135deg, #e8e4d4, #c8c2a8);
-                         display:flex; align-items:center; justify-content:center;">
-                        <img src="{{ asset('imagens/logos/logo_5rv.png') }}"
-                             style="height:48px; opacity:0.18;" alt="">
+            {{-- Slide 1 --}}
+            <div class="bento-slide active">
+                <div class="carousel-grid">
+                    <div class="multi-item-card">
+                        <img src="{{ asset('imagens/home/aereo2.jpeg') }}" class="multi-item-img" alt="Sede 5º BPRv">
+                        <div class="multi-item-caption">
+                            <h5>Sede 5º BPRv</h5>
+                        </div>
                     </div>
-                @endif
-                <div class="multi-item-caption" style="flex-direction:column; align-items:flex-start; text-align:left; padding: 12px 16px !important;">
-                    @if(!empty($post['published_at']))
-                        <span style="font-size:0.68rem; color:#8a7a30; font-weight:700;
-                                     text-transform:uppercase; letter-spacing:1px; margin-bottom:4px;">
-                            {{ \Carbon\Carbon::parse($post['published_at'])->translatedFormat('d M Y') }}
-                        </span>
-                    @endif
-                    <h5 style="margin:0; font-size:0.9rem; font-weight:700; color:#222; line-height:1.3;">
-                        {{ $post['title'] }}
-                    </h5>
-                    @if(!empty($post['excerpt']))
-                        <p style="margin:4px 0 0; font-size:0.78rem; color:#666; line-height:1.4;">
-                            {{ \Illuminate\Support\Str::limit($post['excerpt'], 80) }}
-                        </p>
-                    @endif
-                </div>
-            </a>
-            @endforeach
-        </div>
-    </div>
-    @endif
-
-    {{-- ── Galerias em Destaque (dinâmico) ── --}}
-    @if(!empty($galleryHighlights))
-    <div class="mt-16">
-        <div class="flex items-center gap-4 mb-8">
-            <h2 class="font-heading text-2xl font-bold text-[#202020] whitespace-nowrap">GALERIAS</h2>
-            <div class="flex-grow" style="height:2px; background: linear-gradient(to right, #d5aa32, transparent);"></div>
-            <a href="{{ route('public.galleries.index') }}"
-               class="text-xs font-bold uppercase tracking-widest text-[#8a7a30] whitespace-nowrap hover:text-[#d5aa32] transition-colors">
-                Ver todas →
-            </a>
-        </div>
-        <div class="carousel-grid">
-            @foreach($galleryHighlights as $gallery)
-            <a href="{{ isset($gallery['slug']) && $gallery['slug'] ? route('public.galleries.show', $gallery['slug']) : route('public.galleries.index') }}"
-               class="multi-item-card" style="text-decoration:none; color:inherit;">
-                @if(!empty($gallery['cover_image_path']))
-                    <img src="{{ \Illuminate\Support\Facades\Storage::url($gallery['cover_image_path']) }}"
-                         class="multi-item-img" alt="{{ $gallery['title'] }}">
-                @else
-                    <div class="multi-item-img" style="background: linear-gradient(135deg, #e8e4d4, #c8c2a8);
-                         display:flex; align-items:center; justify-content:center;">
-                        <img src="{{ asset('imagens/logos/logo_5rv.png') }}"
-                             style="height:48px; opacity:0.18;" alt="">
+                    <div class="multi-item-card">
+                        <img src="{{ asset('imagens/home/5rv_fachada2.jpeg') }}" class="multi-item-img" alt="Fachada">
+                        <div class="multi-item-caption">
+                            <h5>Orgulho em pertencer</h5>
+                        </div>
                     </div>
-                @endif
-                <div class="multi-item-caption" style="flex-direction:column; align-items:flex-start; text-align:left; padding: 12px 16px !important;">
-                    @if(!empty($gallery['photos_count']))
-                        <span style="font-size:0.68rem; color:#8a7a30; font-weight:700;
-                                     text-transform:uppercase; letter-spacing:1px; margin-bottom:4px;">
-                            {{ $gallery['photos_count'] }} {{ $gallery['photos_count'] == 1 ? 'foto' : 'fotos' }}
-                        </span>
-                    @endif
-                    <h5 style="margin:0; font-size:0.9rem; font-weight:700; color:#222; line-height:1.3;">
-                        {{ $gallery['title'] }}
-                    </h5>
-                    @if(!empty($gallery['description']))
-                        <p style="margin:4px 0 0; font-size:0.78rem; color:#666; line-height:1.4;">
-                            {{ \Illuminate\Support\Str::limit($gallery['description'], 70) }}
-                        </p>
-                    @endif
+                    <div class="multi-item-card">
+                        <img src="{{ asset('imagens/home/Motos01.jpg') }}" class="multi-item-img" alt="Motos">
+                        <div class="multi-item-caption">
+                            <h5>Tradição</h5>
+                        </div>
+                    </div>
                 </div>
-            </a>
-            @endforeach
+            </div>
+
+            {{-- Slide 2 --}}
+            <div class="bento-slide">
+                <div class="carousel-grid">
+                    <div class="multi-item-card">
+                        <img src="{{ asset('imagens/home/Moto_basehistorica1.jpg') }}" class="multi-item-img"
+                            alt="Base Histórica">
+                        <div class="multi-item-caption">
+                            <h5>Preservação</h5>
+                        </div>
+                    </div>
+                    <div class="multi-item-card">
+                        <img src="{{ asset('imagens/home/moto_botelho.jpg') }}" class="multi-item-img" alt="Moto">
+                        <div class="multi-item-caption">
+                            <h5>Profissionalismo</h5>
+                        </div>
+                    </div>
+                    <div class="multi-item-card">
+                        <img src="{{ asset('imagens/home/tor1.jpeg') }}" class="multi-item-img" alt="TOR">
+                        <div class="multi-item-caption">
+                            <h5>Especializada TOR</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Slide 3 --}}
+            <div class="bento-slide">
+                <div class="carousel-grid">
+                    <div class="multi-item-card">
+                        <img src="{{ asset('imagens/home/91251f7a-335b-4fd8-83cb-ffb39e6c4833-1024x461.jpg') }}"
+                            class="multi-item-img" alt="Legado">
+                        <div class="multi-item-caption">
+                            <h5>Legado</h5>
+                        </div>
+                    </div>
+                    <div class="multi-item-card">
+                        <img src="{{ asset('imagens/home/20211130_083808-1038x584.jpg') }}" class="multi-item-img"
+                            alt="Honra">
+                        <div class="multi-item-caption">
+                            <h5>Honra</h5>
+                        </div>
+                    </div>
+                    <div class="multi-item-card">
+                        <img src="{{ asset('imagens/home/fachadaAereo.jpeg') }}" class="multi-item-img" alt="Excelência">
+                        <div class="multi-item-caption">
+                            <h5>Excelência</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Slide 4 --}}
+            <div class="bento-slide">
+                <div class="carousel-grid">
+                    <div class="multi-item-card">
+                        <img src="{{ asset('imagens/home/alik.JPG') }}" class="multi-item-img" alt="Profissionalismo">
+                        <div class="multi-item-caption">
+                            <h5>Profissionalismo</h5>
+                        </div>
+                    </div>
+                    <div class="multi-item-card">
+                        <img src="{{ asset('imagens/home/camila.JPG') }}" class="multi-item-img" alt="Resiliência">
+                        <div class="multi-item-caption">
+                            <h5>Resiliência</h5>
+                        </div>
+                    </div>
+                    <div class="multi-item-card">
+                        <img src="{{ asset('imagens/home/TOR.jpg') }}" class="multi-item-img" alt="Excelência">
+                        <div class="multi-item-caption">
+                            <h5>Excelência</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Indicadores (bolinhas) --}}
+            <div class="bento-dots" id="bentoDots">
+                <button class="bento-dot active" data-index="0" aria-label="Slide 1"></button>
+                <button class="bento-dot" data-index="1" aria-label="Slide 2"></button>
+                <button class="bento-dot" data-index="2" aria-label="Slide 3"></button>
+                <button class="bento-dot" data-index="3" aria-label="Slide 4"></button>
+            </div>
         </div>
-    </div>
-    @endif
 
-    {{-- ── Rodapé da seção ── --}}
-    <div class="text-center mt-12">
-        <h3 class="font-heading text-xl font-semibold text-[#202020] mb-1">@quintobprvpmesp</h3>
-        <p class="text-[#6e6e6e] text-sm">Acompanhe nossas ações, operações e novidades nas redes sociais.</p>
-    </div>
+        {{-- ══ SEPARADOR: Rodovia Animada ══ --}}
+        <div class="rodovia-wrapper">
+            <canvas id="rodoviaCanvas"></canvas>
+        </div>
 
-</section>
+        {{-- ── Três Cards Estáticos ── --}}
+        <div class="carousel-grid cards-estaticos">
+            <div class="multi-item-card">
+                <img src="{{ asset('imagens/home/qualidade2026.jpeg') }}" class="multi-item-img" alt="Qualidade">
+                <div class="multi-item-caption">
+                    <h5>Compromisso com a Qualidade</h5>
+                </div>
+            </div>
+            <div class="multi-item-card">
+                <img src="{{ asset('imagens/home/salaoperacoes1.jpeg') }}" class="multi-item-img" alt="Operações">
+                <div class="multi-item-caption">
+                    <h5>Tecnologia e Operações</h5>
+                </div>
+            </div>
+            <div class="multi-item-card">
+                <img src="{{ asset('imagens/home/heliponto.jpeg') }}" class="multi-item-img" alt="Infraestrutura">
+                <div class="multi-item-caption">
+                    <h5>Infraestrutura de Ponta</h5>
+                </div>
+            </div>
+        </div>
+
+        {{-- ── Challenge Coin & Heráldica ── --}}
+        <section class="py-24" style="background-color: rgba(13, 13, 13, 0.83)margin-top: 3rem;">
+            <div class="max-w-7xl mx-auto px-4">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-16 text-center">
+                    <div class="lg:col-span-1">
+                        <div class="coin-container">
+                            <img src="{{ asset('imagens/logos/logo_cois1.png') }}" alt="Coin Frente" class="coin-img">
+                            <img src="{{ asset('imagens/logos/logo_coin2.png') }}" alt="Coin Verso" class="coin-img">
+                        </div>
+                        <h3 class="text-4xl font-charming shimmer-gold mb-4">Challenge Coin</h3>
+                        <p class="font-serif-playfair italic tracking-wide leading-relaxed"
+                            style="font-size:1.1rem; color:#000;">
+                            A moeda da irmandade e tradição, entregue apenas àqueles que demonstraram bravura e lealdade ao
+                            Batalhão.
+                        </p>
+                    </div>
+                    <div class="lg:col-span-2 text-left p-12 rounded-2xl" style="
+                        background: linear-gradient(135deg,
+                            #0d1b2a 0%,
+                            #1a3a6e 22%,
+                            #1e5c2e 48%,
+                            #7a4f00 72%,
+                            #c8a020 100%
+                        );
+                        border: 2px solid #d5aa32;
+                        box-shadow: 0 0 24px rgba(213,170,50,0.35), inset 0 0 40px rgba(0,0,0,0.3);
+                    ">
+                        <h3 class="text-3xl font-serif-playfair font-bold mb-6"
+                            style="color:#ffd700; text-shadow: 0 2px 8px rgba(0,0,0,0.7);">Heráldica & Brasões</h3>
+                        <p class="font-serif-playfair mb-8 leading-relaxed"
+                            style="font-size:1.05rem; color:#f0e6c0; text-shadow: 0 1px 4px rgba(0,0,0,0.6);">
+                            Nossos símbolos representam a autoridade e a presença do Estado nas rodovias. A <strong
+                                style="color:#ffd700;">Asa Rodoviária</strong>,
+                            em conjunto com as cores de nossa bandeira, simboliza a rapidez e a firmeza no socorro e
+                            fiscalização.
+                        </p>
+                        <div class="grid grid-cols-2 gap-8">
+                            <div>
+                                <h4 class="font-bold border-l-4 pl-4 mb-2 font-serif-playfair"
+                                    style="border-left-color: #ffd700; color:#ffd700; text-shadow: 0 1px 4px rgba(0,0,0,0.6);">
+                                    Ano de Criação</h4>
+                                <p class="font-serif-playfair"
+                                    style="color:#e8d8a0; text-shadow: 0 1px 3px rgba(0,0,0,0.5);">2008</p>
+                            </div>
+                            <div>
+                                <h4 class="font-bold border-l-4 pl-4 mb-2 font-serif-playfair"
+                                    style="border-left-color: #ffd700; color:#ffd700; text-shadow: 0 1px 4px rgba(0,0,0,0.6);">
+                                    Lema Oficial</h4>
+                                <p class="font-serif-playfair"
+                                    style="color:#e8d8a0; text-shadow: 0 1px 3px rgba(0,0,0,0.5);">O GUARDIÃO DAS RODOVIAS
+                                    DO SUDOESTE PAULISTA</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        {{-- ── Rodapé da seção ── --}}
+        <div class="text-center mt-12">
+            <h3 class="font-heading text-xl font-semibold text-[#202020] mb-1">@quintobprvpmesp</h3>
+            <p class="text-sm" style="background: linear-gradient(90deg, #7a5c00 0%, #c8941a 20%, #f5d060 40%, #fff5b0 50%, #f5d060 60%, #c8941a 80%, #7a5c00 100%); background-size: 200% auto; -webkit-background-clip: text; -webkit-text-fill-color: transparent; animation: shine 3s linear infinite;">Acompanhe nossas ações, operações e novidades nas redes sociais.</p>
+        </div>
+
+    </section>
 @endsection
 
 @php
-    $viaturaPath   = public_path('imagens/viatura_tor.png');
+    $viaturaPath = public_path('imagens/viatura_tor.png');
     $viaturaBase64 = file_exists($viaturaPath)
         ? 'data:image/png;base64,' . base64_encode(file_get_contents($viaturaPath))
         : '';
 @endphp
 
 @section('scripts')
-<script>
-// ── Bento Slider ──
-(function () {
-    const slides = document.querySelectorAll('.bento-slide');
-    const dots   = document.querySelectorAll('.bento-dot');
-    let current  = 0;
-    let timer    = null;
+    <script>
+        // ── Bento Slider ──
+        (function () {
+            const slides = document.querySelectorAll('.bento-slide');
+            const dots = document.querySelectorAll('.bento-dot');
+            let current = 0;
+            let timer = null;
 
-    function goTo(index) {
-        slides[current].classList.remove('active');
-        dots[current].classList.remove('active');
-        current = (index + slides.length) % slides.length;
-        slides[current].classList.add('active');
-        dots[current].classList.add('active');
-    }
+            function goTo(index) {
+                slides[current].classList.remove('active');
+                dots[current].classList.remove('active');
+                current = (index + slides.length) % slides.length;
+                slides[current].classList.add('active');
+                dots[current].classList.add('active');
+            }
 
-    function startAutoplay() { timer = setInterval(() => goTo(current + 1), 3000); }
-    function stopAutoplay()  { clearInterval(timer); }
+            function startAutoplay() { timer = setInterval(() => goTo(current + 1), 3000); }
+            function stopAutoplay() { clearInterval(timer); }
 
-    dots.forEach(dot => {
-        dot.addEventListener('click', () => {
-            stopAutoplay();
-            goTo(parseInt(dot.dataset.index));
-            startAutoplay();
-        });
-    });
-
-    const slider = document.getElementById('bentoSlider');
-    slider.addEventListener('mouseenter', stopAutoplay);
-    slider.addEventListener('mouseleave', startAutoplay);
-
-    startAutoplay();
-})();
-
-// ── Rodovia Animada ──
-(function () {
-    const canvas = document.getElementById('rodoviaCanvas');
-    if (!canvas) return;
-
-    const ctx = canvas.getContext('2d');
-    let width, height, lines = [], viaturaPos = -300;
-
-    const viaturaImg = new Image();
-    @if($viaturaBase64)
-        viaturaImg.src = "{{ $viaturaBase64 }}";
-    @else
-        console.warn('viatura_tor.png não encontrada em public/imagens/');
-    @endif
-
-    function initCanvas() {
-        // Agora ocupa 100% da largura da tela (Full Width)
-        width  = canvas.width  = canvas.parentElement.offsetWidth;
-        height = canvas.height = 90; 
-        lines  = [];
-        for (let i = 0; i < 20; i++) {
-            lines.push({
-                x:      Math.random() * width,
-                y:      Math.random() * height,
-                length: Math.random() * 80 + 20
+            dots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    stopAutoplay();
+                    goTo(parseInt(dot.dataset.index));
+                    startAutoplay();
+                });
             });
-        }
-    }
 
-    function animate() {
-        ctx.clearRect(0, 0, width, height);
+            const slider = document.getElementById('bentoSlider');
+            slider.addEventListener('mouseenter', stopAutoplay);
+            slider.addEventListener('mouseleave', startAutoplay);
 
-        // Acostamento
-        ctx.fillStyle = '#a6a6a6';
-        ctx.fillRect(0, 0, width, 20);
-        ctx.fillRect(0, height - 20, width, 20);
+            startAutoplay();
+        })();
 
-        // Asfalto
-        ctx.fillStyle = '#383838';
-        ctx.fillRect(0, 20, width, height - 40);
+        // ── Rodovia Animada ──
+        (function () {
+            const canvas = document.getElementById('rodoviaCanvas');
+            if (!canvas) return;
 
-        // Faixas brancas laterais
-        ctx.strokeStyle = '#ffffff';
-        ctx.lineWidth = 2;
-        ctx.beginPath(); ctx.moveTo(0, 24); ctx.lineTo(width, 24); ctx.stroke();
-        ctx.beginPath(); ctx.moveTo(0, height - 24); ctx.lineTo(width, height - 24); ctx.stroke();
+            const ctx = canvas.getContext('2d');
+            let width, height, lines = [], viaturaPos = -300;
 
-        // Faixa central dourada tracejada
-        ctx.strokeStyle = '#d5aa32';
-        ctx.setLineDash([50, 40]);
-        ctx.lineWidth = 3;
-        ctx.beginPath(); ctx.moveTo(0, height / 2); ctx.lineTo(width, height / 2); ctx.stroke();
-        ctx.setLineDash([]);
+            const viaturaImg = new Image();
+            @if($viaturaBase64)
+                viaturaImg.src = "{{ $viaturaBase64 }}";
+            @else
+                console.warn('viatura_tor.png não encontrada em public/imagens/');
+            @endif
 
-        // Textura do asfalto
-        ctx.strokeStyle = 'rgba(213, 170, 50, 0.12)';
-        ctx.lineWidth = 1;
-        lines.forEach(l => {
-            ctx.beginPath();
-            ctx.moveTo(l.x, l.y);
-            ctx.lineTo(l.x + l.length, l.y);
-            ctx.stroke();
-        });
+                function initCanvas() {
+                    // Agora ocupa 100% da largura da tela (Full Width)
+                    width = canvas.width = canvas.parentElement.offsetWidth;
+                    height = canvas.height = 90;
+                    lines = [];
+                    for (let i = 0; i < 20; i++) {
+                        lines.push({
+                            x: Math.random() * width,
+                            y: Math.random() * height,
+                            length: Math.random() * 80 + 20
+                        });
+                    }
+                }
 
-        // Viatura
-        viaturaPos += 3;
-        if (viaturaPos > width + 300) viaturaPos = -300;
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
 
-        if (viaturaImg.complete && viaturaImg.naturalWidth > 0) {
-            ctx.drawImage(viaturaImg, viaturaPos, (height - 45) / 2, 110, 45);
-        }
+                // Acostamento
+                ctx.fillStyle = '#a6a6a6';
+                ctx.fillRect(0, 0, width, 20);
+                ctx.fillRect(0, height - 20, width, 20);
 
-        // Giroflex
-        const flash = Math.sin(Date.now() / 50) > 0;
-        ctx.fillStyle = flash ? 'rgba(255,0,0,0.9)' : 'rgba(255,0,0,0.2)';
-        ctx.beginPath();
-        ctx.arc(viaturaPos + 46, (height - 45) / 2 + 2, 3, 0, Math.PI * 2);
-        ctx.fill();
+                // Asfalto
+                ctx.fillStyle = '#383838';
+                ctx.fillRect(0, 20, width, height - 40);
 
-        ctx.fillStyle = flash ? 'rgba(0,100,255,0.2)' : 'rgba(0,100,255,0.9)';
-        ctx.beginPath();
-        ctx.arc(viaturaPos + 57, (height - 45) / 2 + 2, 3, 0, Math.PI * 2);
-        ctx.fill();
+                // Faixas brancas laterais
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 2;
+                ctx.beginPath(); ctx.moveTo(0, 24); ctx.lineTo(width, 24); ctx.stroke();
+                ctx.beginPath(); ctx.moveTo(0, height - 24); ctx.lineTo(width, height - 24); ctx.stroke();
 
-        requestAnimationFrame(animate);
-    }
+                // Faixa central dourada tracejada
+                ctx.strokeStyle = '#d5aa32';
+                ctx.setLineDash([50, 40]);
+                ctx.lineWidth = 3;
+                ctx.beginPath(); ctx.moveTo(0, height / 2); ctx.lineTo(width, height / 2); ctx.stroke();
+                ctx.setLineDash([]);
 
-    window.addEventListener('resize', initCanvas);
-    initCanvas();
-    animate();
-})();
-</script>
+                // Textura do asfalto
+                ctx.strokeStyle = 'rgba(213, 170, 50, 0.12)';
+                ctx.lineWidth = 1;
+                lines.forEach(l => {
+                    ctx.beginPath();
+                    ctx.moveTo(l.x, l.y);
+                    ctx.lineTo(l.x + l.length, l.y);
+                    ctx.stroke();
+                });
+
+                // Viatura
+                viaturaPos += 3;
+                if (viaturaPos > width + 300) viaturaPos = -300;
+
+                if (viaturaImg.complete && viaturaImg.naturalWidth > 0) {
+                    ctx.drawImage(viaturaImg, viaturaPos, (height - 45) / 2, 110, 45);
+                }
+
+                // Giroflex
+                const flash = Math.sin(Date.now() / 50) > 0;
+                ctx.fillStyle = flash ? 'rgba(255,0,0,0.9)' : 'rgba(255,0,0,0.2)';
+                ctx.beginPath();
+                ctx.arc(viaturaPos + 46, (height - 45) / 2 + 2, 3, 0, Math.PI * 2);
+                ctx.fill();
+
+                ctx.fillStyle = flash ? 'rgba(0,100,255,0.2)' : 'rgba(0,100,255,0.9)';
+                ctx.beginPath();
+                ctx.arc(viaturaPos + 57, (height - 45) / 2 + 2, 3, 0, Math.PI * 2);
+                ctx.fill();
+
+                requestAnimationFrame(animate);
+            }
+
+            window.addEventListener('resize', initCanvas);
+            initCanvas();
+            animate();
+        })();
+    </script>
 @endsection
