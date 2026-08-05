@@ -23,6 +23,53 @@
         display: block;
     }
 
+    .post-hero--compact {
+        width: min(calc(100% - 2rem), 414px);
+        height: auto;
+        min-height: 0;
+        max-height: none;
+        object-fit: contain;
+        margin: 2rem auto 0;
+        border-radius: 16px;
+    }
+
+    .post-hero--portrait {
+        width: min(calc(100% - 2rem), 460px);
+    }
+
+    .post-detail--compact {
+        padding-top: 2rem !important;
+    }
+
+    .post-detail--compact .post-meta-label {
+        color: #9a6d00;
+    }
+
+    .post-detail--compact .post-title {
+        max-width: 980px;
+        margin: 0.75rem 0 1rem;
+        color: #171717;
+        font-size: clamp(1.9rem, 3.5vw, 3.25rem);
+        line-height: 1.08;
+        letter-spacing: -0.5px;
+    }
+
+    .post-detail--compact header > div:last-child {
+        margin-bottom: 1.25rem !important;
+    }
+
+    .post-detail--compact .post-excerpt {
+        margin-bottom: 1.5rem;
+        color: #3f3f46;
+        font-weight: 500;
+        line-height: 1.6;
+    }
+
+    .post-detail--compact .post-body {
+        color: #3f3f46;
+        font-weight: 400;
+    }
+
     .post-hero-placeholder {
         width: 100%;
         height: 40vh;
@@ -123,7 +170,8 @@
     {{-- ── Imagem hero ── --}}
     @if($post->image_path)
         <img src="{{ \Illuminate\Support\Facades\Storage::url($post->image_path) }}"
-             class="post-hero" alt="{{ $post->title }}">
+             class="post-hero {{ in_array($post->slug, ['ocorrencia-destaque-julho-2026', 'pm-do-mes-julho-2026'], true) ? 'post-hero--compact' : '' }} {{ $post->slug === 'pm-do-mes-julho-2026' ? 'post-hero--portrait' : '' }}"
+             alt="{{ $post->title }}">
     @else
         <div class="post-hero-placeholder">
             <img src="{{ asset('imagens/logos/logo_5rv.png') }}"
@@ -131,7 +179,7 @@
         </div>
     @endif
 
-    <div class="max-w-4xl mx-auto px-4 py-14 animate-in">
+    <div class="max-w-4xl mx-auto px-4 py-14 animate-in {{ in_array($post->slug, ['ocorrencia-destaque-julho-2026', 'pm-do-mes-julho-2026'], true) ? 'post-detail--compact' : '' }}">
 
         {{-- ── Voltar ── --}}
         <a href="{{ route('public.noticias') }}"

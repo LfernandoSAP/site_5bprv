@@ -273,7 +273,7 @@
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
                 @foreach($featuredPosts as $featured)
-                <a href="{{ route('public.posts.show', $featured) }}"
+                <a href="{{ rtrim(config('app.url'), '/') }}/publicacao.php?slug={{ urlencode($featured->slug) }}"
                    class="destaque-card"
                    style="{{ $loop->index === 1 ? 'border-color: rgba(255,255,255,0.1);' : '' }}">
 
@@ -337,7 +337,7 @@
             @if($posts->isNotEmpty())
             <div class="events-grid">
                 @foreach($posts as $post)
-                <a href="{{ route('public.posts.show', $post) }}" class="event-card">
+                <a href="{{ rtrim(config('app.url'), '/') }}/publicacao.php?slug={{ urlencode($post->slug) }}" class="event-card">
                     @if($post->image_path)
                         <img src="{{ \Illuminate\Support\Facades\Storage::url($post->image_path) }}"
                              class="event-image" alt="{{ $post->title }}">
